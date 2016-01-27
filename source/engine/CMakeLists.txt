@@ -4,7 +4,7 @@
 # 
 
 # find_package(THIRDPARTY REQUIRED)
-
+find_package(Boost REQUIRED COMPONENTS filesystem system)
 
 # 
 # Library name and options
@@ -120,6 +120,7 @@ target_link_libraries(${target}
 
     PUBLIC
     ${DEFAULT_LIBRARIES}
+    ${Boost_LIBRARIES}
 
     INTERFACE
 )
@@ -131,10 +132,12 @@ target_link_libraries(${target}
 
 target_compile_definitions(${target}
     PRIVATE
+    -DGAMEPAD_STATIC_LIB
 
     PUBLIC
     $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:${target_upper}_STATIC_DEFINE>
     ${DEFAULT_COMPILE_DEFINITIONS}
+    -DGLM_FORCE_RADIANS -DGLM_FORCE_SSE2 -DGLFW_INCLUDE_NONE
 
     INTERFACE
 )
