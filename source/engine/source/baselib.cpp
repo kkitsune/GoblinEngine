@@ -2,12 +2,12 @@
 #include <iostream>
 #include <fstream>
 
-#include <template/template-version.h>
+#include <GoblinEngine/GoblinEngine-version.h>
 
-#include <baselib/baselib.h>
+#include <engine/baselib.h>
 
 
-namespace baselib
+namespace engine
 {
 
 
@@ -16,11 +16,11 @@ void printInfo()
     std::string dataPath = "data";
 
     // Library name
-    std::cout << "Library template::baselib" << std::endl;
+    std::cout << "Library template::engine" << std::endl;
     std::cout << "========================================" << std::endl;
 
     // Library version
-    std::cout << "Version: " << TEMPLATE_VERSION << std::endl;
+    std::cout << "Version: " << GOBLINENGINE_VERSION << std::endl;
     std::cout << std::endl;
 
     // Library type (static or dynamic)
@@ -55,4 +55,4 @@ void printInfo()
 }
 
 
-} // namespace baselib
+} // namespace engine

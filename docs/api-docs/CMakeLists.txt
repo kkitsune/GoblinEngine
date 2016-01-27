@@ -47,7 +47,7 @@ configure_file(${doxyfile_in} ${doxyfile})
 # Invoke doxygen
 add_custom_command(
     OUTPUT              ${doxyfile_html}
-    DEPENDS             ${doxyfile} ${META_PROJECT_NAME}::baselib ${META_PROJECT_NAME}::fiblib
+    DEPENDS             ${doxyfile} ${META_PROJECT_NAME}::engine ${META_PROJECT_NAME}::fiblib
     WORKING_DIRECTORY   ${path}
     COMMAND             ${CMAKE_COMMAND} -E copy_directory ${path} ${CMAKE_CURRENT_BINARY_DIR}/html # ToDO, configure doxygen to use source as is
     COMMAND             ${DOXYGEN} \"${doxyfile}\"
