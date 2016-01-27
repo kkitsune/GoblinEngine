@@ -38,6 +38,41 @@ set(sources
     ${source_path}/baselib.cpp
 )
 
+# NanoVG from https://github.com/memononen/nanovg (with some modifications)
+set(sources ${sources}
+    ${source_path}/nanovg/fontstash.h
+    ${source_path}/nanovg/nanovg.c
+    ${source_path}/nanovg/nanovg.h
+    ${source_path}/nanovg/nanovg_gl.h
+    ${source_path}/nanovg/nanovg_gl_utils.h
+    ${source_path}/nanovg/stb_image.h
+    ${source_path}/nanovg/stb_truetype.h
+)
+
+# Gamepad from https://github.com/elanthis/gamepad (does not support MacOS)
+set(GAMEPAD_LIB)
+set(NATIVE_DEFINITIONS)
+
+if(UNIX AND NOT APPLE)
+    set(NATIVE_DEFINITIONS -DGLFW_EXPOSE_NATIVE_X11)
+    set(GAMEPAD_LIB udev)
+    set(sources ${sources}
+        ${source_path}/gamepad/gamepad.c
+        ${source_path}/gamepad/gamepad.h
+    )
+endif()
+if(APPLE)
+    set(NATIVE_DEFINITIONS -DGLFW_EXPOSE_NATIVE_COCOA -DGLFW_EXPOSE_NATIVE_NSGL -DGOBLIN_NO_GAMEPAD)
+endif()
+if(WIN32)
+    set(NATIVE_DEFINITIONS -DGLFW_EXPOSE_NATIVE_WIN32 -DGLFW_EXPOSE_NATIVE_WGL)
+    set(GAMEPAD_LIB XInput)
+    set(sources ${sources}
+        ${source_path}/gamepad/gamepad.c
+        ${source_path}/gamepad/gamepad.h
+    )
+endif()
+
 # Group source files
 set(header_group "Header Files (API)")
 set(source_group "Source Files")
@@ -100,6 +135,9 @@ target_include_directories(${target}
     ${PROJECT_BINARY_DIR}/source/include
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_BINARY_DIR}/include
+    ${glbinding_output}/include
+    ${anax_output}/include
+    ${glfw_output}/include
 
     PUBLIC
     ${DEFAULT_INCLUDE_DIRECTORIES}
@@ -113,14 +151,20 @@ target_include_directories(${target}
 
 # 
 # Libraries
-# 
+#
+
+add_dependencies(${target} glbinding anax glfw)
 
 target_link_libraries(${target}
     PRIVATE
+    ${GAMEPAD_LIB}
+    ${anax_output}/lib/libanax.a
+    ${glfw_output}/lib/glfw3dll.a
 
     PUBLIC
     ${DEFAULT_LIBRARIES}
     ${Boost_LIBRARIES}
+    ${glbinding_output}/lib/libglbinding.dll.a
 
     INTERFACE
 )
@@ -133,6 +177,7 @@ target_link_libraries(${target}
 target_compile_definitions(${target}
     PRIVATE
     -DGAMEPAD_STATIC_LIB
+    ${NATIVE_DEFINITIONS}
 
     PUBLIC
     $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:${target_upper}_STATIC_DEFINE>
