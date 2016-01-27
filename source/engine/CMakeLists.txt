@@ -31,11 +31,11 @@ set(include_path "${CMAKE_CURRENT_SOURCE_DIR}/include/${target}")
 set(source_path  "${CMAKE_CURRENT_SOURCE_DIR}/source")
 
 set(headers
-    ${include_path}/baselib.h
+    ${include_path}/Core.hpp
 )
 
 set(sources
-    ${source_path}/baselib.cpp
+    ${source_path}/Core.cpp
 )
 
 # NanoVG from https://github.com/memononen/nanovg (with some modifications)
@@ -177,12 +177,13 @@ target_link_libraries(${target}
 target_compile_definitions(${target}
     PRIVATE
     -DGAMEPAD_STATIC_LIB
+    -DGLFW_INCLUDE_NONE
     ${NATIVE_DEFINITIONS}
 
     PUBLIC
     $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:${target_upper}_STATIC_DEFINE>
     ${DEFAULT_COMPILE_DEFINITIONS}
-    -DGLM_FORCE_RADIANS -DGLM_FORCE_SSE2 -DGLFW_INCLUDE_NONE
+    -DGLM_FORCE_RADIANS -DGLM_FORCE_SSE2
 
     INTERFACE
 )

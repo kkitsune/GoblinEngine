@@ -8,14 +8,14 @@ endif()
 # 
 
 # find_package(THIRDPARTY REQUIRED)
-
+find_package(Boost REQUIRED COMPONENTS filesystem system)
 
 # 
 # Executable name and options
 # 
 
 # Target name
-set(target fibcmd)
+set(target example)
 
 # Exit here if required dependencies are not met
 message(STATUS "Example ${target}")
@@ -63,18 +63,24 @@ target_include_directories(${target}
     PRIVATE
     ${DEFAULT_INCLUDE_DIRECTORIES}
     ${PROJECT_BINARY_DIR}/source/include
+    ${glbinding_output}/include
+    ${anax_output}/include
 )
 
 
 # 
 # Libraries
-# 
+#
+
+add_dependencies(${target} glbinding anax glfw)
 
 target_link_libraries(${target}
     PRIVATE
     ${DEFAULT_LIBRARIES}
+    ${Boost_LIBRARIES}
     ${META_PROJECT_NAME}::engine
-    ${META_PROJECT_NAME}::fiblib
+    ${anax_output}/lib/libanax.a
+    ${glbinding_output}/lib/libglbinding.dll.a
 )
 
 
@@ -85,12 +91,13 @@ target_link_libraries(${target}
 target_compile_definitions(${target}
     PRIVATE
     ${DEFAULT_COMPILE_DEFINITIONS}
+    -DGLM_FORCE_RADIANS -DGLM_FORCE_SSE2
 )
 
 
 # 
 # Compile options
-# 
+#
 
 target_compile_options(${target}
     PRIVATE
@@ -100,11 +107,17 @@ target_compile_options(${target}
 
 # 
 # Linker options
-# 
+#
+
+set(WINDOWS_NOCONSOLE)
+if (MINGW)
+    set(WINDOWS_NOCONSOLE -Wl,--subsystem,windows)
+endif (MINGW)
 
 target_link_libraries(${target}
     PRIVATE
     ${DEFAULT_LINKER_OPTIONS}
+    ${WINDOWS_NOCONSOLE}
 )
 
 
