@@ -33,6 +33,8 @@ set(source_path  "${CMAKE_CURRENT_SOURCE_DIR}/source")
 set(headers
     ${include_path}/Utils/Json.hpp
     ${include_path}/Utils/Perlin.hpp
+    ${include_path}/Utils/ThreadPool.hpp
+    ${include_path}/Utils/ThreadSafeQueue.hpp
 
     ${include_path}/Core.hpp
     ${include_path}/Settings.hpp

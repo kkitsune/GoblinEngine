@@ -3,6 +3,7 @@
 #include <engine/engine_api.h>
 #include <memory>
 
+#include "Utils/ThreadPool.hpp"
 #include "Settings.hpp"
 
 class ENGINE_API Core final
@@ -31,8 +32,15 @@ public:
 
 	void poll_events();
 
+	template<typename Func, typename... Args>
+	inline auto submit_task(Func f, Args&&... args)
+	{
+		return _pool.submit(f, args...);
+	}
+
 private:
 	static Core* _inst;
 
 	std::unique_ptr<Settings> _settings;
+	ThreadPool _pool;
 };

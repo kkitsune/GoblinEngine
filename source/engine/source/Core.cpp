@@ -28,7 +28,7 @@ Core& Core::instance()
 	return *_inst;
 }
 
-Core::Core() : _settings(new Settings)
+Core::Core() : _settings(new Settings), _pool()
 {
 	_settings->load();
 	glfwInit();
