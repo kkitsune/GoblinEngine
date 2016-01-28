@@ -31,11 +31,20 @@ set(include_path "${CMAKE_CURRENT_SOURCE_DIR}/include/${target}")
 set(source_path  "${CMAKE_CURRENT_SOURCE_DIR}/source")
 
 set(headers
+    ${include_path}/Utils/Json.hpp
+    ${include_path}/Utils/Perlin.hpp
+
     ${include_path}/Core.hpp
+    ${include_path}/Settings.hpp
+    ${include_path}/Gamepad.hpp
 )
 
 set(sources
+    ${source_path}/Utils/Perlin.cpp
+
     ${source_path}/Core.cpp
+    ${source_path}/Settings.cpp
+    ${source_path}/Gamepad.cpp
 )
 
 # NanoVG from https://github.com/memononen/nanovg (with some modifications)
