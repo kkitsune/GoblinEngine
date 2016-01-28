@@ -39,6 +39,7 @@ set(headers
     ${include_path}/Core.hpp
     ${include_path}/Settings.hpp
     ${include_path}/Gamepad.hpp
+    ${include_path}/Common.hpp
 )
 
 set(sources
@@ -47,6 +48,7 @@ set(sources
     ${source_path}/Core.cpp
     ${source_path}/Settings.cpp
     ${source_path}/Gamepad.cpp
+    ${source_path}/Common.cpp
 )
 
 # NanoVG from https://github.com/memononen/nanovg (with some modifications)
@@ -81,6 +83,18 @@ if(WIN32)
     set(sources ${sources}
         ${source_path}/gamepad/gamepad.c
         ${source_path}/gamepad/gamepad.h
+    )
+endif()
+
+set(EXTRA_LIBS)
+if(APPLE)
+    find_library(cocoa_library Cocoa)
+    find_library(opengl_library OpenGL)
+    find_library(corevideo_library CoreVideo)
+    find_library(iokit_library IOKit)
+    set(EXTRA_LIBS ${cocoa_library} ${opengl_library} ${corevideo_library} ${iokit_library})
+    set(sources ${sources}
+        ${source_path}/darwin.mm
     )
 endif()
 
@@ -169,6 +183,7 @@ add_dependencies(${target} glbinding anax glfw)
 target_link_libraries(${target}
     PRIVATE
     ${GAMEPAD_LIB}
+    ${EXTRA_LIBS}
     ${anax_output}/lib/libanax.a
     ${glfw_output}/lib/glfw3dll.a
 

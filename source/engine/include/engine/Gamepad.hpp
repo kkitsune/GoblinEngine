@@ -1,7 +1,6 @@
 #pragma once
 
-#include <engine/engine_api.h>
-#include <glm/glm.hpp>
+#include "Common.hpp"
 
 constexpr int GamepadDeadzoneLeftStick = 7849;
 constexpr int GamepadDeadzoneRightStick = 8689;
@@ -66,7 +65,7 @@ extern ENGINE_API void gamepad_update();
  * \param id The device to check.
  * \returns true if the device is connected, false if it is not.
  */
-extern ENGINE_API bool gamepad_is_connected(glm::uint8 id);
+extern ENGINE_API bool gamepad_is_connected(uint8 id);
 
 /**
  * Test if a particular button is being pressed.
@@ -75,7 +74,7 @@ extern ENGINE_API bool gamepad_is_connected(glm::uint8 id);
  * \param button The button to check.
  * \returns true if the button is down, false if it is not.
  */
-extern ENGINE_API bool gamepad_button_down(glm::uint8 id, GamepadButton const& button);
+extern ENGINE_API bool gamepad_button_down(uint8 id, GamepadButton const& button);
 
 /**
  * Test if a particular button has been depressed since the previous call to GamepadUpdate.
@@ -84,7 +83,7 @@ extern ENGINE_API bool gamepad_button_down(glm::uint8 id, GamepadButton const& b
  * \param button The button to check.
  * \returns true if the button has been pressed, false if it is not or if it was depressed the previous frame.
  */
-extern ENGINE_API bool gamepad_button_triggered(glm::uint8 id, GamepadButton const& button);
+extern ENGINE_API bool gamepad_button_triggered(uint8 id, GamepadButton const& button);
 
 /**
  * Test if a particular button has been released since the previous call to GamepadUpdate.
@@ -93,7 +92,7 @@ extern ENGINE_API bool gamepad_button_triggered(glm::uint8 id, GamepadButton con
  * \param button The button to check.
  * \returns true if the button has been released, true if it is down or if it was not down the previous frame.
  */
-extern ENGINE_API bool gamepad_button_released(glm::uint8 id, GamepadButton const& button);
+extern ENGINE_API bool gamepad_button_released(uint8 id, GamepadButton const& button);
 
 /**
  * Get the trigger value (depression magnitude) in its raw form.
@@ -102,7 +101,7 @@ extern ENGINE_API bool gamepad_button_released(glm::uint8 id, GamepadButton cons
  * \param trigger The trigger to check.
  * \returns Trigger depression magnitude (0 to 32767).
  */
-extern ENGINE_API int gamepad_trigger_value(glm::uint8 id, GamepadTrigger const& trigger);
+extern ENGINE_API int gamepad_trigger_value(uint8 id, GamepadTrigger const& trigger);
 
 /**
  * Get the trigger value (depression magnitude) in normalized form.
@@ -111,7 +110,7 @@ extern ENGINE_API int gamepad_trigger_value(glm::uint8 id, GamepadTrigger const&
  * \param trigger The trigger to check.
  * \returns Trigger depression magnitude (0 to 1).
  */
-extern ENGINE_API float gamepad_trigger_length(glm::uint8 id, GamepadTrigger const& trigger);
+extern ENGINE_API float gamepad_trigger_length(uint8 id, GamepadTrigger const& trigger);
 
 /**
  * Test if a trigger is depressed
@@ -120,7 +119,7 @@ extern ENGINE_API float gamepad_trigger_length(glm::uint8 id, GamepadTrigger con
  * \param trigger The trigger to check.
  * \returns true if down, false otherwise.
  */
-extern ENGINE_API bool gamepad_trigger_down(glm::uint8 id, GamepadTrigger const& trigger);
+extern ENGINE_API bool gamepad_trigger_down(uint8 id, GamepadTrigger const& trigger);
 
 /**
  * Test if a trigger is depressed
@@ -129,7 +128,7 @@ extern ENGINE_API bool gamepad_trigger_down(glm::uint8 id, GamepadTrigger const&
  * \param trigger The trigger to check.
  * \returns true if triggered, false otherwise.
  */
-extern ENGINE_API bool gamepad_trigger_triggered(glm::uint8 id, GamepadTrigger const& trigger);
+extern ENGINE_API bool gamepad_trigger_triggered(uint8 id, GamepadTrigger const& trigger);
 
 /**
  * Test if a trigger is depressed
@@ -138,7 +137,7 @@ extern ENGINE_API bool gamepad_trigger_triggered(glm::uint8 id, GamepadTrigger c
  * \param trigger The trigger to check.
  * \returns true if released, false otherwise.
  */
-extern ENGINE_API bool gamepad_trigger_released(glm::uint8 id, GamepadTrigger const& trigger);
+extern ENGINE_API bool gamepad_trigger_released(uint8 id, GamepadTrigger const& trigger);
 
 /**
  * Set the rumble motors on/off.
@@ -151,7 +150,7 @@ extern ENGINE_API bool gamepad_trigger_released(glm::uint8 id, GamepadTrigger co
  * \param left Left motor strengh (0 to 1).
  * \param right Right motor strengh (0 to 1).
  */
-extern ENGINE_API void gamepad_set_rumble(glm::uint8 id, float left, float right);
+extern ENGINE_API void gamepad_set_rumble(uint8 id, float left, float right);
 
 /**
  * Query the position of an analog stick as raw values.
@@ -165,7 +164,7 @@ extern ENGINE_API void gamepad_set_rumble(glm::uint8 id, float left, float right
  * \param stick The stick to check.
  * \returns glm::ivec2 that stores to magnitude of X and Y (-32767 to 32767).
  */
-extern ENGINE_API glm::ivec2 gamepad_stick(glm::uint8 id, GamepadStick const& stick);
+extern ENGINE_API ivec2 gamepad_stick(uint8 id, GamepadStick const& stick);
 
 /**
  * Query the position of an analog stick as normalized values.
@@ -179,7 +178,7 @@ extern ENGINE_API glm::ivec2 gamepad_stick(glm::uint8 id, GamepadStick const& st
  * \param stick The stick to check.
  * \returns glm::vec2 that stores the magnitude of X and Y (-1 to 1).
  */
-extern ENGINE_API glm::vec2 gamepad_stick_norm(glm::uint8 id, GamepadStick const& stick);
+extern ENGINE_API vec2 gamepad_stick_norm(uint8 id, GamepadStick const& stick);
 
 /**
  * Query the magnitude of an analog stick.
@@ -191,7 +190,7 @@ extern ENGINE_API glm::vec2 gamepad_stick_norm(glm::uint8 id, GamepadStick const
  * \param stick The stick to check.
  * \returns The magnitude of the stick (0 to 1).
  */
-extern ENGINE_API float gamepad_stick_length(glm::uint8 id, GamepadStick const& stick);
+extern ENGINE_API float gamepad_stick_length(uint8 id, GamepadStick const& stick);
 
 /**
  * Query the direction of a stick (in radians).
@@ -204,4 +203,4 @@ extern ENGINE_API float gamepad_stick_length(glm::uint8 id, GamepadStick const& 
  * \param stick The stick to check.
  * \returns The angle of the stick (0 to 2*PI).
  */
-extern ENGINE_API float gamepad_stick_angle(glm::uint8 id, GamepadStick const& stick);
+extern ENGINE_API float gamepad_stick_angle(uint8 id, GamepadStick const& stick);

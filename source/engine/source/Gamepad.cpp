@@ -3,8 +3,6 @@
 
 #include "gamepad/gamepad.h"
 
-using namespace glm;
-
 void gamepad_init()
 {
 #ifdef GOBLIN_NO_GAMEPAD
