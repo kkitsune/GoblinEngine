@@ -36,7 +36,7 @@ set(sources
 
 # Build executable
 add_executable(${target}
-    MACOSX_BUNDLE
+    MACOSX_BUNDLE WIN32
     ${sources}
 )
 
@@ -109,15 +109,9 @@ target_compile_options(${target}
 # Linker options
 #
 
-set(WINDOWS_NOCONSOLE)
-if (MINGW)
-    set(WINDOWS_NOCONSOLE -Wl,--subsystem,windows)
-endif (MINGW)
-
 target_link_libraries(${target}
     PRIVATE
     ${DEFAULT_LINKER_OPTIONS}
-    ${WINDOWS_NOCONSOLE}
 )
 
 
