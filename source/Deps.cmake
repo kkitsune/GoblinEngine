@@ -7,6 +7,13 @@ ExternalProject_Add(glbinding
 
 set(glbinding_output ${CMAKE_CURRENT_BINARY_DIR}/glbinding)
 
+ExternalProject_Add_Step(
+        glbinding CopyToBin
+        COMMAND ${CMAKE_COMMAND} -E copy <INSTALL_DIR>/libglbinding.dll ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+        DEPENDEES install
+        ALWAYS 1
+)
+
 ExternalProject_Add(anax
         GIT_REPOSITORY https://github.com/miguelmartin75/anax.git
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/anax
@@ -23,3 +30,10 @@ ExternalProject_Add(glfw
         )
 
 set(glfw_output ${CMAKE_CURRENT_BINARY_DIR}/glfw)
+
+ExternalProject_Add_Step(
+        glfw CopyToBin
+        COMMAND ${CMAKE_COMMAND} -E copy <INSTALL_DIR>/lib/glfw3.dll ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+        DEPENDEES install
+        ALWAYS 1
+)
