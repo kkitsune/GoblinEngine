@@ -29,6 +29,18 @@ using glm::quat;
 using glm::mat2x3;
 using glm::mat4;
 
+enum class Cursor
+{
+	Arrow = 0,
+	IBeam,
+	Crosshair,
+	Hand,
+	HResize,
+	VResize,
+
+	Count
+};
+
 struct Color
 {
 	Color() = default;
