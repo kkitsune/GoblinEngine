@@ -80,8 +80,6 @@ class ENGINE_API Painter final : public Object
 public:
 	Painter();
 
-	virtual ~Painter();
-
 	Painter(Painter const& other) = delete;
 
 	Painter(Painter&& other);
@@ -215,6 +213,9 @@ public:
 	Paint radial_gradient(vec2 const& center, float in_radius, float out_radius, vec4 const& start_color, vec4 const& end_color);
 
 	Paint image_pattern(vec2 const& origin, vec2 const& extent, float angle, int image, float alpha);
+
+protected:
+	virtual ~Painter();
 
 private:
 	struct NVGcontext* _vg;
