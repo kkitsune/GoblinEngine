@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Monitor.hpp"
+#include "Object.hpp"
 
 class ENGINE_API Screen
 {

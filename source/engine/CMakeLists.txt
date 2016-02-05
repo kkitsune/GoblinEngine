@@ -36,14 +36,18 @@ set(headers
     ${include_path}/Utils/Perlin.hpp
     ${include_path}/Utils/ThreadPool.hpp
     ${include_path}/Utils/ThreadSafeQueue.hpp
+    ${include_path}/Utils/BitmaskOperators.hpp
 
     ${include_path}/Core.hpp
     ${include_path}/Settings.hpp
     ${include_path}/Gamepad.hpp
     ${include_path}/Common.hpp
+    ${include_path}/Object.hpp
     ${include_path}/Screen.hpp
     ${include_path}/DisplayMode.hpp
     ${include_path}/Monitor.hpp
+    ${include_path}/Widget.hpp
+    ${include_path}/Painter.hpp
 )
 
 set(sources
@@ -56,6 +60,8 @@ set(sources
     ${source_path}/Screen.cpp
     ${source_path}/DisplayMode.cpp
     ${source_path}/Monitor.cpp
+    ${source_path}/Widget.cpp
+    ${source_path}/Painter.cpp
 )
 
 # NanoVG from https://github.com/memononen/nanovg (with some modifications)
