@@ -40,6 +40,9 @@ set(headers
     ${include_path}/Settings.hpp
     ${include_path}/Gamepad.hpp
     ${include_path}/Common.hpp
+    ${include_path}/Screen.hpp
+    ${include_path}/DisplayMode.hpp
+    ${include_path}/Monitor.hpp
 )
 
 set(sources
@@ -49,6 +52,9 @@ set(sources
     ${source_path}/Settings.cpp
     ${source_path}/Gamepad.cpp
     ${source_path}/Common.cpp
+    ${source_path}/Screen.cpp
+    ${source_path}/DisplayMode.cpp
+    ${source_path}/Monitor.cpp
 )
 
 # NanoVG from https://github.com/memononen/nanovg (with some modifications)
