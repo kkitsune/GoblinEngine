@@ -48,6 +48,8 @@ set(headers
     ${include_path}/Monitor.hpp
     ${include_path}/Widget.hpp
     ${include_path}/Painter.hpp
+    ${include_path}/Layout.hpp
+    ${include_path}/Theme.hpp
 )
 
 set(sources
@@ -62,6 +64,7 @@ set(sources
     ${source_path}/Monitor.cpp
     ${source_path}/Widget.cpp
     ${source_path}/Painter.cpp
+    ${source_path}/Theme.cpp
 )
 
 # NanoVG from https://github.com/memononen/nanovg (with some modifications)
