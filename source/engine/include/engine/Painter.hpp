@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Utils/BitmaskOperators.hpp"
-#include "Common.hpp"
+#include "Object.hpp"
 
 enum class Winding
 {
@@ -75,12 +75,12 @@ struct Paint
 	int image;
 };
 
-class ENGINE_API Painter final
+class ENGINE_API Painter final : public Object
 {
 public:
 	Painter();
 
-	~Painter();
+	virtual ~Painter();
 
 	Painter(Painter const& other) = delete;
 
