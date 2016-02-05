@@ -4,15 +4,13 @@
 # 
 
 # find_package(THIRDPARTY REQUIRED)
-find_package(Boost REQUIRED COMPONENTS filesystem system)
-find_package(GLFW REQUIRED)
 
 # 
 # Library name and options
 # 
 
 # Target name
-set(target engine)
+set(target anax)
 
 # Exit here if required dependencies are not met
 message(STATUS "Lib ${target}")
@@ -32,78 +30,34 @@ set(include_path "${CMAKE_CURRENT_SOURCE_DIR}/include/${target}")
 set(source_path  "${CMAKE_CURRENT_SOURCE_DIR}/source")
 
 set(headers
-    ${include_path}/Utils/Json.hpp
-    ${include_path}/Utils/Perlin.hpp
-    ${include_path}/Utils/ThreadPool.hpp
-    ${include_path}/Utils/ThreadSafeQueue.hpp
-
-    ${include_path}/Core.hpp
-    ${include_path}/Settings.hpp
-    ${include_path}/Gamepad.hpp
-    ${include_path}/Common.hpp
-    ${include_path}/Screen.hpp
-    ${include_path}/DisplayMode.hpp
-    ${include_path}/Monitor.hpp
+    ${include_path}/anax.hpp
+    ${include_path}/Component.hpp
+    ${include_path}/Config.hpp
+    ${include_path}/Entity.hpp
+    ${include_path}/FilterOptions.hpp
+    ${include_path}/System.hpp
+    ${include_path}/World.hpp
+    
+    ${include_path}/detail/AnaxAssert.hpp
+    ${include_path}/detail/BaseSystem.hpp
+    ${include_path}/detail/ClassTypeId.hpp
+    ${include_path}/detail/ComponentTypeList.hpp
+    ${include_path}/detail/EntityComponentStorage.hpp
+    ${include_path}/detail/EntityIdPool.hpp
+    ${include_path}/detail/Filter.hpp
+    
+    ${include_path}/util/ContainerUtils.hpp
 )
 
 set(sources
-    ${source_path}/Utils/Perlin.cpp
-
-    ${source_path}/Core.cpp
-    ${source_path}/Settings.cpp
-    ${source_path}/Gamepad.cpp
-    ${source_path}/Common.cpp
-    ${source_path}/Screen.cpp
-    ${source_path}/DisplayMode.cpp
-    ${source_path}/Monitor.cpp
+    ${source_path}/Entity.cpp
+    ${source_path}/World.cpp
+    
+    ${source_path}/detail/BaseSystem.cpp
+    ${source_path}/detail/EntityComponentStorage.cpp
+    ${source_path}/detail/EntityIdPool.cpp
+    ${source_path}/detail/Filter.cpp
 )
-
-# NanoVG from https://github.com/memononen/nanovg (with some modifications)
-set(sources ${sources}
-    ${source_path}/nanovg/fontstash.h
-    ${source_path}/nanovg/nanovg.c
-    ${source_path}/nanovg/nanovg.h
-    ${source_path}/nanovg/nanovg_gl.h
-    ${source_path}/nanovg/nanovg_gl_utils.h
-    ${source_path}/nanovg/stb_image.h
-    ${source_path}/nanovg/stb_truetype.h
-)
-
-# Gamepad from https://github.com/elanthis/gamepad (does not support MacOS)
-set(GAMEPAD_LIB)
-set(NATIVE_DEFINITIONS)
-
-if(UNIX AND NOT APPLE)
-    set(NATIVE_DEFINITIONS -DGLFW_EXPOSE_NATIVE_X11)
-    set(GAMEPAD_LIB udev)
-    set(sources ${sources}
-        ${source_path}/gamepad/gamepad.c
-        ${source_path}/gamepad/gamepad.h
-    )
-endif()
-if(APPLE)
-    set(NATIVE_DEFINITIONS -DGLFW_EXPOSE_NATIVE_COCOA -DGLFW_EXPOSE_NATIVE_NSGL -DGOBLIN_NO_GAMEPAD)
-endif()
-if(WIN32)
-    set(NATIVE_DEFINITIONS -DGLFW_EXPOSE_NATIVE_WIN32 -DGLFW_EXPOSE_NATIVE_WGL)
-    set(GAMEPAD_LIB XInput)
-    set(sources ${sources}
-        ${source_path}/gamepad/gamepad.c
-        ${source_path}/gamepad/gamepad.h
-    )
-endif()
-
-set(EXTRA_LIBS)
-if(APPLE)
-    find_library(cocoa_library Cocoa)
-    find_library(opengl_library OpenGL)
-    find_library(corevideo_library CoreVideo)
-    find_library(iokit_library IOKit)
-    set(EXTRA_LIBS ${cocoa_library} ${opengl_library} ${corevideo_library} ${iokit_library})
-    set(sources ${sources}
-        ${source_path}/darwin.mm
-    )
-endif()
 
 # Group source files
 set(header_group "Header Files (API)")
@@ -167,7 +121,6 @@ target_include_directories(${target}
     ${PROJECT_BINARY_DIR}/source/include
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_BINARY_DIR}/include
-    ${GLFW_INCLUDE_DIR}
 
     PUBLIC
     ${DEFAULT_INCLUDE_DIRECTORIES}
@@ -187,15 +140,9 @@ add_dependencies(${target} anax)
 
 target_link_libraries(${target}
     PRIVATE
-    ${GAMEPAD_LIB}
-    ${EXTRA_LIBS}
-    ${GLFW_LIBRARIES}
 
     PUBLIC
     ${DEFAULT_LIBRARIES}
-    ${Boost_LIBRARIES}
-    ${META_PROJECT_NAME}::glbinding
-    ${META_PROJECT_NAME}::anax
 
     INTERFACE
 )
@@ -207,14 +154,11 @@ target_link_libraries(${target}
 
 target_compile_definitions(${target}
     PRIVATE
-    -DGAMEPAD_STATIC_LIB
-    -DGLFW_INCLUDE_NONE
     ${NATIVE_DEFINITIONS}
 
     PUBLIC
     $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:${target_upper}_STATIC_DEFINE>
     ${DEFAULT_COMPILE_DEFINITIONS}
-    -DGLM_FORCE_RADIANS -DGLM_FORCE_SSE2
 
     INTERFACE
 )
@@ -263,10 +207,6 @@ install(TARGETS ${target}
 # Header files
 install(DIRECTORY
     ${CMAKE_CURRENT_SOURCE_DIR}/include/${target} DESTINATION ${INSTALL_INCLUDE}
-    COMPONENT dev
-)
-install(DIRECTORY
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/glm DESTINATION ${INSTALL_INCLUDE}
     COMPONENT dev
 )
 

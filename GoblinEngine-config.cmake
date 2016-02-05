@@ -9,6 +9,7 @@
 set(MODULE_NAMES
     engine
     glbinding
+    anax
 )
 
 

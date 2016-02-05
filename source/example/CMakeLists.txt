@@ -63,7 +63,6 @@ target_include_directories(${target}
     PRIVATE
     ${DEFAULT_INCLUDE_DIRECTORIES}
     ${PROJECT_BINARY_DIR}/source/include
-    ${anax_output}/include
 )
 
 
@@ -71,15 +70,13 @@ target_include_directories(${target}
 # Libraries
 #
 
-add_dependencies(${target} glbinding anax glfw)
-
 target_link_libraries(${target}
     PRIVATE
     ${DEFAULT_LIBRARIES}
     ${Boost_LIBRARIES}
     ${META_PROJECT_NAME}::engine
     ${META_PROJECT_NAME}::glbinding
-    ${anax_output}/lib/libanax.a
+    ${META_PROJECT_NAME}::anax
 )
 
 

@@ -12,11 +12,10 @@ configure_file(version.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/${META_PROJECT_N
 # Sub-projects
 #
 
-include(Deps.cmake)
-
 # Libraries
 set(IDE_FOLDER "")
 add_subdirectory(glbinding)
+add_subdirectory(anax)
 add_subdirectory(engine)
 
 # Examples
