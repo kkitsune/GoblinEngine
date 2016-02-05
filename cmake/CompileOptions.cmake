@@ -18,7 +18,7 @@ endif()
 # 
 
 set(DEFAULT_PROJECT_OPTIONS
-    DEBUG_POSTFIX             "d"
+    DEBUG_POSTFIX             "_d"
     CXX_STANDARD              14
     LINKER_LANGUAGE           "CXX"
     POSITION_INDEPENDENT_CODE ON
