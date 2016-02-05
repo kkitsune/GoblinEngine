@@ -63,7 +63,6 @@ target_include_directories(${target}
     PRIVATE
     ${DEFAULT_INCLUDE_DIRECTORIES}
     ${PROJECT_BINARY_DIR}/source/include
-    ${glbinding_output}/include
     ${anax_output}/include
 )
 
@@ -79,8 +78,8 @@ target_link_libraries(${target}
     ${DEFAULT_LIBRARIES}
     ${Boost_LIBRARIES}
     ${META_PROJECT_NAME}::engine
+    ${META_PROJECT_NAME}::glbinding
     ${anax_output}/lib/libanax.a
-    ${glbinding_output}/lib/libglbinding.dll.a
 )
 
 

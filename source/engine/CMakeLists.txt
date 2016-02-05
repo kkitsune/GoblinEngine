@@ -166,7 +166,6 @@ target_include_directories(${target}
     ${PROJECT_BINARY_DIR}/source/include
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_BINARY_DIR}/include
-    ${glbinding_output}/include
     ${anax_output}/include
     ${glfw_output}/include
 
@@ -184,7 +183,7 @@ target_include_directories(${target}
 # Libraries
 #
 
-add_dependencies(${target} glbinding anax glfw)
+add_dependencies(${target} anax glfw)
 
 target_link_libraries(${target}
     PRIVATE
@@ -196,7 +195,7 @@ target_link_libraries(${target}
     PUBLIC
     ${DEFAULT_LIBRARIES}
     ${Boost_LIBRARIES}
-    ${glbinding_output}/lib/libglbinding.dll.a
+    ${META_PROJECT_NAME}::glbinding
 
     INTERFACE
 )

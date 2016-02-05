@@ -16,6 +16,7 @@ include(Deps.cmake)
 
 # Libraries
 set(IDE_FOLDER "")
+add_subdirectory(glbinding)
 add_subdirectory(engine)
 
 # Examples
