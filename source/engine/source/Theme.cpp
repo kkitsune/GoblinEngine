@@ -1,6 +1,6 @@
 #include <engine/Theme.hpp>
 
-Theme::Theme(Ref<Painter>& p)
+Theme::Theme(Ref<Painter> p)
 {
 	_standard_font_size = 16;
 	_button_font_size = 20;

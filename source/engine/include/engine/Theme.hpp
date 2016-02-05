@@ -5,7 +5,7 @@
 class Theme : public Object
 {
 public:
-	Theme(Ref<Painter>& p);
+	Theme(Ref<Painter> p);
 
 	Theme(Theme const& other) = default;
 
