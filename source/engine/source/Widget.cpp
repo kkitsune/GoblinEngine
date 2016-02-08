@@ -53,17 +53,17 @@ Widget* Widget::find_widget(ivec2 const& p)
 	return contains(p) ? this : nullptr;
 }
 
-bool Widget::mouse_button_event(ivec2 const& p, int button, bool down, int modifiers)
+bool Widget::mouse_button_event(ivec2 const& p, Mouse button, bool down, int modifiers)
 {
 	return false;
 }
 
-bool Widget::mouse_motion_event(ivec2 const& p, const ivec2& rel, int button, int modifiers)
+bool Widget::mouse_motion_event(ivec2 const& p, const ivec2& rel, Mouse button, int modifiers)
 {
 	return false;
 }
 
-bool Widget::mouse_drag_event(ivec2 const& p, const ivec2& rel, int button, int modifiers)
+bool Widget::mouse_drag_event(ivec2 const& p, const ivec2& rel, Mouse button, int modifiers)
 {
 	return false;
 }
@@ -83,7 +83,7 @@ bool Widget::focus_event(bool focused)
 	return false;
 }
 
-bool Widget::keyboard_event(int key, int scancode, int action, int modifiers)
+bool Widget::keyboard_event(Key key, int scancode, Action action, int modifiers)
 {
 	return false;
 }

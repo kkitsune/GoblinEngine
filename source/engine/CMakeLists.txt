@@ -39,6 +39,7 @@ set(headers
     ${include_path}/Utils/BitmaskOperators.hpp
 
     ${include_path}/Core.hpp
+        ${include_path}/InputEnums.hpp
     ${include_path}/Settings.hpp
     ${include_path}/Gamepad.hpp
     ${include_path}/Common.hpp

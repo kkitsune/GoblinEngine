@@ -1,5 +1,6 @@
 #pragma once
 
+#include "InputEnums.hpp"
 #include "Layout.hpp"
 #include "Theme.hpp"
 
@@ -168,11 +169,11 @@ public:
 
 	Widget* find_widget(ivec2 const& p);
 
-	virtual bool mouse_button_event(ivec2 const& p, int button, bool down, int modifiers);
+	virtual bool mouse_button_event(ivec2 const& p, Mouse button, bool down, int modifiers);
 
-	virtual bool mouse_motion_event(ivec2 const& p, const ivec2& rel, int button, int modifiers);
+	virtual bool mouse_motion_event(ivec2 const& p, const ivec2& rel, Mouse button, int modifiers);
 
-	virtual bool mouse_drag_event(ivec2 const& p, const ivec2& rel, int button, int modifiers);
+	virtual bool mouse_drag_event(ivec2 const& p, const ivec2& rel, Mouse button, int modifiers);
 
 	virtual bool mouse_enter_event(ivec2 const& p, bool enter);
 
@@ -180,7 +181,7 @@ public:
 
 	virtual bool focus_event(bool focused);
 
-	virtual bool keyboard_event(int key, int scancode, int action, int modifiers);
+	virtual bool keyboard_event(Key key, int scancode, Action action, int modifiers);
 
 	virtual bool keyboard_character_event(unsigned int codepoint);
 
