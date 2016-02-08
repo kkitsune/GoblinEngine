@@ -1,4 +1,5 @@
 #include <engine/Widget.hpp>
+#include <engine/Screen.hpp>
 
 Widget::Widget(Widget* parent) : _parent(nullptr), _layout(), _theme(),
 								 _pos(), _size(), _fixed_size(), _visible(true), _enabled(true), _focused(false), _mouse_focus(false),
@@ -19,22 +20,44 @@ Widget::~Widget()
 
 void Widget::add_child(Widget* child)
 {
-
+	_children.push_back(child);
+	child->add_ref();
+	child->parent(this);
 }
 
 void Widget::remove_child(uint64 index)
 {
-
+	Widget* widget = _children[index];
+	_children.erase(_children.begin() + index);
+	widget->dec_ref();
 }
 
 void Widget::remove_child(Widget const* child)
 {
-
+	_children.erase(std::remove(_children.begin(), _children.end(), child), _children.end());
+	child->dec_ref();
 }
+
+/*Window* Widget::window()
+{
+	Widget *widget = this;
+	while (true)
+	{
+		if (!widget)
+			throw std::runtime_error("Widget:internal error (could not find parent window)");
+		Window *window = dynamic_cast<Window*>(widget);
+		if (window)
+			return window;
+		widget = widget->parent();
+	}
+}*/
 
 void Widget::request_focus()
 {
-
+	/*Widget* widget = this;
+	while (widget->parent())
+		widget = widget->parent();
+	dynamic_cast<Screen*>(widget)->update_focus(this);*/
 }
 
 int Widget::font_size() const
@@ -55,11 +78,31 @@ Widget* Widget::find_widget(ivec2 const& p)
 
 bool Widget::mouse_button_event(ivec2 const& p, Mouse button, bool down, int modifiers)
 {
+	for (auto it = _children.rbegin(); it != _children.rend(); ++it)
+	{
+		Widget* child = *it;
+		if (child->visible() && child->contains(p - _pos) &&
+			child->mouse_button_event(p - _pos, button, down, modifiers))
+			return true;
+	}
+	if (button == Mouse::Left && down && !_focused)
+		request_focus();
 	return false;
 }
 
 bool Widget::mouse_motion_event(ivec2 const& p, const ivec2& rel, Mouse button, int modifiers)
 {
+	for (auto it = _children.rbegin(); it != _children.rend(); ++it)
+	{
+		Widget* child = *it;
+		if (!child->visible())
+			continue;
+		bool contained = child->contains(p - _pos), prev_contained = child->contains(p - _pos - rel);
+		if (contained != prev_contained)
+			child->mouse_enter_event(p, contained);
+		if ((contained || prev_contained) && child->mouse_motion_event(p - _pos, rel, button, modifiers))
+			return true;
+	}
 	return false;
 }
 
@@ -70,16 +113,26 @@ bool Widget::mouse_drag_event(ivec2 const& p, const ivec2& rel, Mouse button, in
 
 bool Widget::mouse_enter_event(ivec2 const& p, bool enter)
 {
+	_mouse_focus = enter;
 	return false;
 }
 
 bool Widget::scroll_event(ivec2 const& p, ivec2 const& rel)
 {
+	for (auto it = _children.rbegin(); it != _children.rend(); ++it)
+	{
+		Widget* child = *it;
+		if (!child->visible())
+			continue;
+		if (child->contains(p - _pos) && child->scroll_event(p - _pos, rel))
+			return true;
+	}
 	return false;
 }
 
 bool Widget::focus_event(bool focused)
 {
+	_focused = focused;
 	return false;
 }
 
@@ -113,5 +166,12 @@ void Widget::perform_layout(Ref<Painter> p)
 
 void Widget::draw(Ref<Painter> p)
 {
+	if (_children.empty())
+		return;
 
+	p->translate(vec2(_pos.x, _pos.y));
+	for (auto child : _children)
+		if (child->visible())
+			child->draw(p);
+	p->translate(vec2(-_pos.x, -_pos.y));
 }
