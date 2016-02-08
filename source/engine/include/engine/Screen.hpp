@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Monitor.hpp"
-#include "Object.hpp"
+#include "Widget.hpp"
 
-class ENGINE_API Screen
+class ENGINE_API Screen : public Widget
 {
 public:
 	Screen();

@@ -1,13 +1,13 @@
 #include <engine/Screen.hpp>
 
-Screen::Screen() : _wnd(nullptr)
+Screen::Screen() : Widget(nullptr), _wnd(nullptr)
 { }
 
 Screen::~Screen()
 {
 }
 
-Screen::Screen(Screen&& other) : _wnd(other._wnd)
+Screen::Screen(Screen&& other) : Widget(nullptr), _wnd(other._wnd)
 {
 	other._wnd = nullptr;
 }
