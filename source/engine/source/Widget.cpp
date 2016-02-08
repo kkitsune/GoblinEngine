@@ -1,5 +1,6 @@
 #include <engine/Widget.hpp>
 #include <engine/Screen.hpp>
+#include <algorithm>
 
 Widget::Widget(Widget* parent) : _parent(nullptr), _layout(), _theme(),
 								 _pos(), _size(), _fixed_size(), _visible(true), _enabled(true), _focused(false), _mouse_focus(false),
@@ -106,12 +107,12 @@ bool Widget::mouse_motion_event(ivec2 const& p, const ivec2& rel, Mouse button, 
 	return false;
 }
 
-bool Widget::mouse_drag_event(ivec2 const& p, const ivec2& rel, Mouse button, int modifiers)
+bool Widget::mouse_drag_event(ivec2 const&, const ivec2&, Mouse, int)
 {
 	return false;
 }
 
-bool Widget::mouse_enter_event(ivec2 const& p, bool enter)
+bool Widget::mouse_enter_event(ivec2 const&, bool enter)
 {
 	_mouse_focus = enter;
 	return false;
@@ -136,12 +137,12 @@ bool Widget::focus_event(bool focused)
 	return false;
 }
 
-bool Widget::keyboard_event(Key key, int scancode, Action action, int modifiers)
+bool Widget::keyboard_event(Key, int, Action, int)
 {
 	return false;
 }
 
-bool Widget::keyboard_character_event(unsigned int codepoint)
+bool Widget::keyboard_character_event(unsigned int)
 {
 	return false;
 }
