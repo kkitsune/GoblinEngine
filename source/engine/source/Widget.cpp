@@ -16,13 +16,13 @@ Widget::Widget(Widget* parent) : _parent(nullptr), _layout(), _theme(),
 Widget::~Widget()
 {
 	for (auto child : _children)
-		if (child) child->dec_ref();
+		if (child) child->unref();
 }
 
 void Widget::add_child(Widget* child)
 {
 	_children.push_back(child);
-	child->add_ref();
+	child->ref();
 	child->parent(this);
 }
 
@@ -30,13 +30,13 @@ void Widget::remove_child(uint64 index)
 {
 	Widget* widget = _children[index];
 	_children.erase(_children.begin() + index);
-	widget->dec_ref();
+	widget->unref();
 }
 
 void Widget::remove_child(Widget const* child)
 {
 	_children.erase(std::remove(_children.begin(), _children.end(), child), _children.end());
-	child->dec_ref();
+	child->unref();
 }
 
 /*Window* Widget::window()

@@ -14,19 +14,17 @@ public:
 	inline Object(Object const&) : _ref(0)
 	{ }
 
-	inline int ref_count() const
-	{ return _ref; }
+	inline unsigned int reference_count() const
+	{ return _ref.load(); }
 
-	inline void add_ref() const
+	inline void ref() const
 	{ ++_ref; }
 
-	inline void dec_ref(bool dealloc = true) const
+	inline void unref(bool dealloc = true) const
 	{
 		--_ref;
 		if(_ref == 0 && dealloc)
 			delete this;
-		else
-			throw std::runtime_error("Internal Error : reference count < 0");
 	}
 
 protected:
@@ -34,7 +32,7 @@ protected:
 	{ }
 
 private:
-	mutable std::atomic_int _ref { 0 };
+	mutable std::atomic_uint _ref{0};
 };
 
 template<typename T>
@@ -45,13 +43,13 @@ public:
 	{ }
 
 	inline Ref(T* ptr) : _ptr(ptr)
-	{ if(_ptr) _ptr->add_ref(); }
+	{ if (_ptr) _ptr->ref(); }
 
 	inline ~Ref()
-	{ if(_ptr) _ptr->dec_ref(); }
+	{ if (_ptr) _ptr->unref(); }
 
 	inline Ref(Ref const& other) : _ptr(other._ptr)
-	{ if(_ptr) _ptr->add_ref(); }
+	{ if (_ptr) _ptr->ref(); }
 
 	inline Ref(Ref&& other) : _ptr(other._ptr)
 	{ other._ptr = nullptr; }
@@ -61,9 +59,9 @@ public:
 		if(_ptr == other._ptr)
 			return *this;
 
-		if(_ptr) _ptr->dec_ref();
+		if (_ptr) _ptr->unref();
 		_ptr = other._ptr;
-		if(_ptr) _ptr->add_ref();
+		if (_ptr) _ptr->ref();
 		return *this;
 	}
 
@@ -72,7 +70,7 @@ public:
 		if(*this == other)
 			return *this;
 
-		if(_ptr) _ptr->dec_ref();
+		if (_ptr) _ptr->unref();
 		_ptr = other._ptr;
 		other._ptr = nullptr;
 		return *this;
@@ -83,9 +81,9 @@ public:
 		if(_ptr == ptr)
 			return *this;
 
-		if(_ptr) _ptr->dec_ref();
+		if (_ptr) _ptr->unref();
 		_ptr = ptr;
-		if(_ptr) _ptr->add_ref();
+		if (_ptr) _ptr->ref();
 		return *this;
 	}
 
