@@ -328,7 +328,12 @@ bool Screen::cursor_pos_callback(double x, double y)
 		}
 	}
 	else
-		ret = _drag_widget->mouse_drag_event(p - _drag_widget->parent()->absolute_position(), p - _mouse_pos, static_cast<Mouse>(_mouse_state), _modifiers);
+	{
+		if(_drag_widget == nullptr)
+			ret = false;
+		else
+			ret = _drag_widget->mouse_drag_event(p - _drag_widget->parent()->absolute_position(), p - _mouse_pos, static_cast<Mouse>(_mouse_state), _modifiers);
+	}
 
 	if (!ret) ret = mouse_motion_event(p, p - _mouse_pos, static_cast<Mouse>(_mouse_state), _modifiers);
 	_mouse_pos = p;
