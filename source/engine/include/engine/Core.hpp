@@ -5,7 +5,7 @@
 
 #include "Common.hpp"
 
-#include "Utils/ThreadPool.hpp"
+#include "utils/ThreadPool.hpp"
 #include "Settings.hpp"
 #include "Object.hpp"
 

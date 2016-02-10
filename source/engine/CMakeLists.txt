@@ -32,14 +32,14 @@ set(include_path "${CMAKE_CURRENT_SOURCE_DIR}/include/${target}")
 set(source_path  "${CMAKE_CURRENT_SOURCE_DIR}/source")
 
 set(headers
-    ${include_path}/Utils/Json.hpp
-    ${include_path}/Utils/Perlin.hpp
-    ${include_path}/Utils/ThreadPool.hpp
-    ${include_path}/Utils/ThreadSafeQueue.hpp
-    ${include_path}/Utils/BitmaskOperators.hpp
+    ${include_path}/utils/Json.hpp
+    ${include_path}/utils/Perlin.hpp
+    ${include_path}/utils/ThreadPool.hpp
+    ${include_path}/utils/ThreadSafeQueue.hpp
+    ${include_path}/utils/BitmaskOperators.hpp
 
     ${include_path}/Core.hpp
-        ${include_path}/InputEnums.hpp
+    ${include_path}/InputEnums.hpp
     ${include_path}/Settings.hpp
     ${include_path}/Gamepad.hpp
     ${include_path}/Common.hpp
@@ -54,7 +54,7 @@ set(headers
 )
 
 set(sources
-    ${source_path}/Utils/Perlin.cpp
+    ${source_path}/utils/Perlin.cpp
 
     ${source_path}/Core.cpp
     ${source_path}/Settings.cpp
