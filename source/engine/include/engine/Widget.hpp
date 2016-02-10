@@ -4,7 +4,7 @@
 #include "Layout.hpp"
 #include "Theme.hpp"
 
-class Widget : public Object
+class ENGINE_API Widget : public Object
 {
 public:
 	Widget(Widget* parent);
