@@ -1,10 +1,14 @@
 #pragma once
 
 #include <engine/engine_api.h>
+
+#include <glbinding/gl40core/gl.h>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
+
+using namespace gl40core;
 
 using glm::int8;
 using glm::int16;
