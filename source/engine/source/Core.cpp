@@ -87,20 +87,23 @@ void Core::run()
 		int num_scr = 0;
 		for(auto scr : _screens)
 		{
-			if(!scr->visible())
-				continue;
-			else if(scr->should_close())
+			if(scr->visible())
 			{
-				scr->visible(false);
-				continue;
+				if (scr->should_close())
+					scr->visible(false);
+				else
+				{
+					scr->draw_all();
+					++num_scr;
+				}
 			}
-
-			scr->draw_all();
-			++num_scr;
 		}
 
-		running = num_scr > 0;
-		if(running)
+		if(num_scr > 0)
 			glfwWaitEvents();
+		else
+			running = false;
 	}
+
+	refresh_thread.join();
 }
