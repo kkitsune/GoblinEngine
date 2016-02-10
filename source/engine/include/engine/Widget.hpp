@@ -17,85 +17,85 @@ public:
 
 	Widget& operator=(Widget&& other) = default;
 
-	Widget* parent()
+	virtual Widget* parent()
 	{ return _parent; }
 
-	Widget const* parent() const
+	virtual Widget const* parent() const
 	{ return _parent; }
 
-	void parent(Widget* parent)
+	virtual void parent(Widget* parent)
 	{ _parent = parent; }
 
-	Layout* layout()
+	virtual Layout* layout()
 	{ return _layout; }
 
-	Layout const* layout() const
+	virtual Layout const* layout() const
 	{ return _layout.get(); }
 
-	void layout(Layout* layout)
+	virtual void layout(Layout* layout)
 	{ _layout = layout; }
 
-	Theme* theme()
+	virtual Theme* theme()
 	{ return _theme; }
 
-	Theme const* theme() const
+	virtual Theme const* theme() const
 	{ return _theme.get(); }
 
-	void theme(Theme* theme)
+	virtual void theme(Theme* theme)
 	{ _theme = theme; }
 
-	ivec2 position() const
+	virtual ivec2 position() const
 	{ return _pos; }
 
-	void position(ivec2 const& pos)
+	virtual void position(ivec2 const& pos)
 	{ _pos = pos; }
 
-	ivec2 absolute_position() const
+	virtual ivec2 absolute_position() const
 	{ return _parent ? _parent->absolute_position() + _pos : _pos; }
 
-	ivec2 size() const
+	virtual ivec2 size() const
 	{ return _size; }
 
-	void size(ivec2 const& size)
+	virtual void size(ivec2 const& size)
 	{ _size = size; }
 
-	ivec2::value_type width() const
+	virtual ivec2::value_type width() const
 	{ return _size.x; }
 
-	void width(ivec2::value_type x)
+	virtual void width(ivec2::value_type x)
 	{ _size.x = x; }
 
-	ivec2::value_type height() const
+	virtual ivec2::value_type height() const
 	{ return _size.y; }
 
-	void height(ivec2::value_type y)
+	virtual void height(ivec2::value_type y)
 	{ _size.y = y; }
 
-	ivec2 fixed_size() const
+	virtual ivec2 fixed_size() const
 	{ return _fixed_size; }
 
-	void fixed_size(ivec2 const& size)
+	virtual void fixed_size(ivec2 const& size)
 	{ _fixed_size = size; }
 
-	ivec2::value_type fixed_width() const
+	virtual ivec2::value_type fixed_width() const
 	{ return _fixed_size.x; }
 
-	void fixed_width(ivec2::value_type x)
+	virtual void fixed_width(ivec2::value_type x)
 	{ _fixed_size.x = x; }
 
-	ivec2::value_type fixed_height() const
+	virtual ivec2::value_type fixed_height() const
 	{ return _fixed_size.y; }
 
-	void fixed_height(ivec2::value_type y)
+	virtual void fixed_height(ivec2::value_type y)
 	{ _fixed_size.y = y; }
 
-	bool visible() const
+	virtual bool visible() const
 	{ return _visible; }
 
-	void visible(bool value)
+	virtual void visible(bool value)
 	{ _visible = value; }
 
-	bool visible_recursive() const
+	virtual bool visible_recursive() const
 	{
 		bool visible = true;
 		Widget const* w = this;
@@ -107,67 +107,67 @@ public:
 		return visible;
 	}
 
-	uint64 child_count() const
+	virtual uint64 child_count() const
 	{ return _children.size(); }
 
-	std::vector<Widget*> const& children() const
+	virtual std::vector<Widget*> const& children() const
 	{ return _children; }
 
-	void add_child(Widget* child);
+	virtual void add_child(Widget* child);
 
-	void remove_child(uint64 index);
+	virtual void remove_child(uint64 index);
 
-	void remove_child(Widget const* child);
+	virtual void remove_child(Widget const* child);
 
 	//Window* window();
 
-	std::string id() const
+	virtual std::string id() const
 	{ return _id; }
 
-	void id(std::string const& id)
+	virtual void id(std::string const& id)
 	{ _id = id; }
 
-	bool enabled() const
+	virtual bool enabled() const
 	{ return _enabled; }
 
-	void enabled(bool value)
+	virtual void enabled(bool value)
 	{ _enabled = value; }
 
-	bool focused() const
+	virtual bool focused() const
 	{ return _focused; }
 
-	void focused(bool value)
+	virtual void focused(bool value)
 	{ _focused = value; }
 
-	void request_focus();
+	virtual void request_focus();
 
-	std::string tooltip() const
+	virtual std::string tooltip() const
 	{ return _tooltip; }
 
-	void tooltip(std::string const& tip)
+	virtual void tooltip(std::string const& tip)
 	{ _tooltip = tip; }
 
-	int font_size() const;
+	virtual int font_size() const;
 
-	void font_size(int size)
+	virtual void font_size(int size)
 	{ _font_size = size; }
 
-	bool has_font_size() const
+	virtual bool has_font_size() const
 	{ return _font_size > 0; }
 
-	Cursor cursor() const
+	virtual Cursor cursor() const
 	{ return _cursor; }
 
-	void cursor(Cursor cursor)
+	virtual void cursor(Cursor cursor)
 	{ _cursor = cursor; }
 
-	bool contains(ivec2 const& p) const
+	virtual bool contains(ivec2 const& p) const
 	{
 		ivec2 d = p - _pos;
 		return d.x >= 0 && d.y >= 0 && d.x < _size.x && d.y < _size.y;
 	}
 
-	Widget* find_widget(ivec2 const& p);
+	virtual Widget* find_widget(ivec2 const& p);
 
 	virtual bool mouse_button_event(ivec2 const& p, Mouse button, bool down, int modifiers);
 
