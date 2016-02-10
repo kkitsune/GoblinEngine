@@ -226,7 +226,7 @@ void Screen::draw_all()
 	glClearColor(_background.x, _background.y, _background.z, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	draw_contents();
+	draw_scene();
 	draw_widgets();
 
 	glfwSwapBuffers(_wnd);

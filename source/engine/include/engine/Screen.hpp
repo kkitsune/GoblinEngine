@@ -65,7 +65,7 @@ public:
 
 	virtual void draw_all();
 
-	virtual void draw_contents()
+	virtual void draw_scene()
 	{ }
 
 	virtual bool drop_event(std::vector<std::string> const& filenames);
