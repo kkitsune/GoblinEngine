@@ -52,3 +52,11 @@ void Core::poll_events()
 	if (_settings->gamepad_enabled())
 		gamepad_update();
 }
+
+void Core::reset_window_hints()
+{
+	glfwDefaultWindowHints();
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+}

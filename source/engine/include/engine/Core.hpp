@@ -31,6 +31,8 @@ public:
 	Settings& settings()
 	{ return *(_settings.get()); }
 
+	void reset_window_hints();
+
 	void poll_events();
 
 	template<typename Func, typename... Args>
