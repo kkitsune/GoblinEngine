@@ -183,6 +183,16 @@ void Screen::caption(std::string const& caption)
 	_caption = caption;
 }
 
+bool Screen::should_close() const
+{
+	return glfwWindowShouldClose(_wnd) == 1;
+}
+
+void Screen::should_close(bool value)
+{
+	glfwSetWindowShouldClose(_wnd, value ? 1 : 0);
+}
+
 void Screen::visible(bool value)
 {
 	if (value != _visible)

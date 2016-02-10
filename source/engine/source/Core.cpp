@@ -89,7 +89,7 @@ void Core::run()
 		{
 			if(!scr->visible())
 				continue;
-			else if(glfwWindowShouldClose(scr->_wnd))
+			else if(scr->should_close())
 			{
 				scr->visible(false);
 				continue;

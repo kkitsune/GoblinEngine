@@ -5,8 +5,6 @@
 
 class ENGINE_API Screen : public Widget
 {
-	friend class Core;
-
 public:
 	Screen(ivec2 const& size, std::string const& caption, bool resizable = true, Screen* share = nullptr);
 
@@ -28,6 +26,10 @@ public:
 	{ return _caption; }
 
 	virtual void caption(std::string const& caption);
+
+	virtual bool should_close() const;
+
+	virtual void should_close(bool value);
 
 	virtual vec3 backbround() const
 	{ return _background; }
