@@ -39,7 +39,7 @@ int main(int /*argc*/, char* /*argv*/[])
 	}
 	catch(exception& e)
 	{
-		cerr << "Exception caught : " << e.what() << endl;
+		cout << "Exception caught : " << e.what() << endl;
 	}
 
 	Core::destroy();
