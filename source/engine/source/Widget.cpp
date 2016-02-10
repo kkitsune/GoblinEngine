@@ -55,10 +55,10 @@ void Widget::remove_child(Widget const* child)
 
 void Widget::request_focus()
 {
-	/*Widget* widget = this;
+	Widget* widget = this;
 	while (widget->parent())
 		widget = widget->parent();
-	dynamic_cast<Screen*>(widget)->update_focus(this);*/
+	dynamic_cast<Screen*>(widget)->update_focus(this);
 }
 
 int Widget::font_size() const
@@ -138,14 +138,10 @@ bool Widget::focus_event(bool focused)
 }
 
 bool Widget::keyboard_event(Key, int, Action, int)
-{
-	return false;
-}
+{ return false; }
 
 bool Widget::keyboard_character_event(unsigned int)
-{
-	return false;
-}
+{ return false; }
 
 ivec2 Widget::preferred_size(Ref<Painter> p)
 {

@@ -11,7 +11,7 @@ int main(int /*argc*/, char* /*argv*/[])
 
 	try
 	{
-		Screen wnd;
+		Screen wnd(ivec2(960, 640), "GoblinEngine Example");
 	}
 	catch(exception& e)
 	{
