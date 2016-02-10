@@ -38,6 +38,14 @@ set(headers
     ${include_path}/utils/ThreadSafeQueue.hpp
     ${include_path}/utils/BitmaskOperators.hpp
 
+    ${include_path}/resource/Buffer.hpp
+    ${include_path}/resource/Framebuffer.hpp
+    ${include_path}/resource/Handle.hpp
+    ${include_path}/resource/Sampler.hpp
+    ${include_path}/resource/Shader.hpp
+    ${include_path}/resource/Texture.hpp
+    ${include_path}/resource/VertexArray.hpp
+
     ${include_path}/Core.hpp
     ${include_path}/InputEnums.hpp
     ${include_path}/Settings.hpp
@@ -55,6 +63,9 @@ set(headers
 
 set(sources
     ${source_path}/utils/Perlin.cpp
+
+    ${source_path}/resource/Shader.cpp
+    ${source_path}/resource/Texture.cpp
 
     ${source_path}/Core.cpp
     ${source_path}/Settings.cpp
