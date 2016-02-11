@@ -34,23 +34,10 @@ Licensed under the MIT License <http://opensource.org/licenses/MIT>.
 #include <utility>
 #include <vector>
 
-// enable ssize_t on MinGW
-#ifdef __GNUC__
-    #ifdef __MINGW32__
-        #include <sys/types.h>
-    #endif
-#endif
-
 // disable float-equal warnings on GCC/clang
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wfloat-equal"
-#endif
-
-// enable ssize_t for MSVC
-#ifdef _MSC_VER
-    #include <basetsd.h>
-    using ssize_t = SSIZE_T;
 #endif
 
 /*!
@@ -1019,11 +1006,14 @@ class basic_json
     @brief create an object (implicit)
 
     Create an object JSON value with a given content. This constructor allows
-    any type that can be used to construct values of type @ref object_t.
-    Examples include the types `std::map` and `std::unordered_map`.
+    any type @a CompatibleObjectType that can be used to construct values of
+    type @ref object_t.
 
-    @tparam CompatibleObjectType an object type whose `key_type` and
-    `value_type` is compatible to @ref object_t
+    @tparam CompatibleObjectType An object type whose `key_type` and
+    `value_type` is compatible to @ref object_t. Examples include `std::map`,
+    `std::unordered_map`, `std::multimap`, and `std::unordered_multimap` with
+    a `key_type` of `std::string`, and a `value_type` from which a @ref
+    basic_json value can be constructed.
 
     @param[in] val  a value for the object
 
@@ -1078,11 +1068,14 @@ class basic_json
     @brief create an array (implicit)
 
     Create an array JSON value with a given content. This constructor allows
-    any type that can be used to construct values of type @ref array_t.
-    Examples include the types `std::vector`, `std::list`, and `std::set`.
+    any type @a CompatibleArrayType that can be used to construct values of
+    type @ref array_t.
 
-    @tparam CompatibleArrayType an object type whose `value_type` is compatible
-    to @ref array_t
+    @tparam CompatibleArrayType An object type whose `value_type` is compatible
+    to @ref array_t. Examples include `std::vector`, `std::deque`, `std::list`,
+    `std::forward_list`, `std::array`, `std::set`, `std::unordered_set`,
+    `std::multiset`, and `unordered_multiset` with a `value_type` from which a
+    @ref basic_json value can be constructed.
 
     @param[in] val  a value for the array
 
@@ -1172,7 +1165,7 @@ class basic_json
     @param[in] val  a value for the string
 
     @tparam CompatibleStringType an string type which is compatible to @ref
-    string_t
+    string_t, for instance `std::string`.
 
     @complexity Linear in the size of the passed @a val.
 
@@ -1218,14 +1211,12 @@ class basic_json
 
     Create an integer number JSON value with a given content.
 
-    @tparam T  helper type to compare number_integer_t and int (not visible in)
-    the interface.
+    @tparam T A helper type to remove this function via SFINAE in case @ref
+    number_integer_t is the same as `int`. In this case, this constructor would
+    have the same signature as @ref basic_json(const int value). Note the
+    helper type @a T is not visible in this constructor's interface.
 
     @param[in] val  an integer to create a JSON number from
-
-    @note This constructor would have the same signature as @ref
-    basic_json(const int value), so we need to switch this one off in case
-    number_integer_t is the same as int. This is done via the helper type @a T.
 
     @complexity Constant.
 
@@ -1282,12 +1273,12 @@ class basic_json
     @brief create an integer number (implicit)
 
     Create an integer number JSON value with a given content. This constructor
-    allows any type that can be used to construct values of type @ref
-    number_integer_t. Examples may include the types `int`, `int32_t`, or
-    `short`.
+    allows any type @a CompatibleNumberIntegerType that can be used to
+    construct values of type @ref number_integer_t.
 
-    @tparam CompatibleNumberIntegerType an integer type which is compatible to
-    @ref number_integer_t.
+    @tparam CompatibleNumberIntegerType An integer type which is compatible to
+    @ref number_integer_t. Examples include the types `int`, `int32_t`, `long`,
+    and `short`.
 
     @param[in] val  an integer to create a JSON number from
 
@@ -1346,12 +1337,12 @@ class basic_json
     @brief create an unsigned number (implicit)
 
     Create an unsigned number JSON value with a given content. This constructor
-    allows any type that can be used to construct values of type @ref
-    number_unsigned_t. Examples may include the types `unsigned int`,
-    `uint32_t`, or `unsigned short`.
+    allows any type @a CompatibleNumberUnsignedType that can be used to
+    construct values of type @ref number_unsigned_t.
 
-    @tparam CompatibleNumberUnsignedType an integer type which is compatible to
-    @ref number_unsigned_t.
+    @tparam CompatibleNumberUnsignedType An integer type which is compatible to
+    @ref number_unsigned_t. Examples may include the types `unsigned int`,
+    `uint32_t`, or `unsigned short`.
 
     @param[in] val  an unsigned integer to create a JSON number from
 
@@ -1413,11 +1404,11 @@ class basic_json
     @brief create an floating-point number (implicit)
 
     Create an floating-point number JSON value with a given content. This
-    constructor allows any type that can be used to construct values of type
-    @ref number_float_t. Examples may include the types `float`.
+    constructor allows any type @a CompatibleNumberFloatType that can be used
+    to construct values of type @ref number_float_t.
 
-    @tparam CompatibleNumberFloatType a floating-point type which is compatible
-    to @ref number_float_t.
+    @tparam CompatibleNumberFloatType A floating-point type which is compatible
+    to @ref number_float_t. Examples may include the types `float` or `double`.
 
     @param[in] val  a floating-point to create a JSON number from
 
@@ -1804,6 +1795,31 @@ class basic_json
                 throw std::domain_error("cannot use construct with iterators from " + first.m_object->type_name());
             }
         }
+    }
+
+    /*!
+    @brief construct a JSON value given an input stream
+
+    @param[in,out] i  stream to read a serialized JSON value from
+    @param[in] cb a parser callback function of type @ref parser_callback_t
+    which is used to control the deserialization by filtering unwanted values
+    (optional)
+
+    @complexity Linear in the length of the input. The parser is a predictive
+    LL(1) parser. The complexity can be higher if the parser callback function
+    @a cb has a super-linear complexity.
+
+    @note A UTF-8 byte order mark is silently ignored.
+
+    @liveexample{The example below demonstrates constructing a JSON value from
+    a `std::stringstream` with and without callback
+    function.,basic_json__istream}
+
+    @since version 2.0.0
+    */
+    explicit basic_json(std::istream& i, parser_callback_t cb = nullptr)
+    {
+        *this = parser(i, cb).parse();
     }
 
     ///////////////////////////////////////
@@ -3115,7 +3131,7 @@ class basic_json
     @return reference to the element at index @a idx
 
     @throw std::domain_error if JSON is not an array or null; example: `"cannot
-    use operator[] with null"`
+    use operator[] with string"`
 
     @complexity Constant if @a idx is in the range of the array. Otherwise
     linear in `idx - size()`.
@@ -3128,16 +3144,17 @@ class basic_json
     */
     reference operator[](size_type idx)
     {
-        // implicitly convert null to object
+        // implicitly convert null value to an empty array
         if (is_null())
         {
             m_type = value_t::array;
             m_value.array = create<array_t>();
         }
 
-        // [] only works for arrays
+        // operator[] only works for arrays
         if (is_array())
         {
+            // fill up array with null values until given idx is reached
             assert(m_value.array != nullptr);
             for (size_t i = m_value.array->size(); i <= idx; ++i)
             {
@@ -3173,7 +3190,7 @@ class basic_json
     */
     const_reference operator[](size_type idx) const
     {
-        // at only works for arrays
+        // const operator[] only works for arrays
         if (is_array())
         {
             assert(m_value.array != nullptr);
@@ -3199,7 +3216,7 @@ class basic_json
     @return reference to the element at key @a key
 
     @throw std::domain_error if JSON is not an object or null; example:
-    `"cannot use operator[] with null"`
+    `"cannot use operator[] with string"`
 
     @complexity Logarithmic in the size of the container.
 
@@ -3214,14 +3231,14 @@ class basic_json
     */
     reference operator[](const typename object_t::key_type& key)
     {
-        // implicitly convert null to object
+        // implicitly convert null value to an empty object
         if (is_null())
         {
             m_type = value_t::object;
             m_value.object = create<object_t>();
         }
 
-        // [] only works for objects
+        // operator[] only works for objects
         if (is_object())
         {
             assert(m_value.object != nullptr);
@@ -3262,7 +3279,7 @@ class basic_json
     */
     const_reference operator[](const typename object_t::key_type& key) const
     {
-        // [] only works for objects
+        // const operator[] only works for objects
         if (is_object())
         {
             assert(m_value.object != nullptr);
@@ -3289,7 +3306,7 @@ class basic_json
     @return reference to the element at key @a key
 
     @throw std::domain_error if JSON is not an object or null; example:
-    `"cannot use operator[] with null"`
+    `"cannot use operator[] with string"`
 
     @complexity Logarithmic in the size of the container.
 
@@ -3357,7 +3374,7 @@ class basic_json
     @return reference to the element at key @a key
 
     @throw std::domain_error if JSON is not an object or null; example:
-    `"cannot use operator[] with null"`
+    `"cannot use operator[] with string"`
 
     @complexity Logarithmic in the size of the container.
 
@@ -3559,8 +3576,12 @@ class basic_json
     @brief access the last element
 
     Returns a reference to the last element in the container. For a JSON
-    container `c`, the expression `c.back()` is equivalent to `{ auto tmp =
-    c.end(); --tmp; return *tmp; }`.
+    container `c`, the expression `c.back()` is equivalent to
+    @code {.cpp}
+    auto tmp = c.end();
+    --tmp;
+    return *tmp;
+    @endcode
 
     @return In case of a structured type (array or object), a reference to the
     last element is returned. In cast of number, string, or boolean values, a
@@ -3572,7 +3593,7 @@ class basic_json
     an empty array or object (undefined behavior, guarded by assertions).
     @post The JSON value remains unchanged.
 
-    @throw std::out_of_range when called on null value.
+    @throw std::out_of_range when called on `null` value.
 
     @liveexample{The following code shows an example for `back()`.,back}
 
@@ -3600,28 +3621,29 @@ class basic_json
     /*!
     @brief remove element given an iterator
 
-    Removes the element specified by iterator @a pos. Invalidates iterators and
-    references at or after the point of the erase, including the end()
-    iterator. The iterator @a pos must be valid and dereferenceable. Thus the
-    end() iterator (which is valid, but is not dereferenceable) cannot be used
-    as a value for @a pos.
+    Removes the element specified by iterator @a pos. The iterator @a pos must
+    be valid and dereferenceable. Thus the `end()` iterator (which is valid,
+    but is not dereferenceable) cannot be used as a value for @a pos.
 
-    If called on a primitive type other than null, the resulting JSON value
+    If called on a primitive type other than `null`, the resulting JSON value
     will be `null`.
 
     @param[in] pos iterator to the element to remove
     @return Iterator following the last removed element. If the iterator @a pos
-    refers to the last element, the end() iterator is returned.
+    refers to the last element, the `end()` iterator is returned.
 
     @tparam InteratorType an @ref iterator or @ref const_iterator
+
+    @post Invalidates iterators and references at or after the point of the
+    erase, including the `end()` iterator.
 
     @throw std::domain_error if called on a `null` value; example: `"cannot use
     erase() with null"`
     @throw std::domain_error if called on an iterator which does not belong to
     the current JSON value; example: `"iterator does not fit current value"`
     @throw std::out_of_range if called on a primitive type with invalid
-    iterator (i.e., any iterator which is not end()); example: `"iterator out
-    of range"`
+    iterator (i.e., any iterator which is not `begin()`); example: `"iterator
+    out of range"`
 
     @complexity The complexity depends on the type:
     - objects: amortized constant
@@ -3706,20 +3728,22 @@ class basic_json
     /*!
     @brief remove elements given an iterator range
 
-    Removes the element specified by the range `[first; last)`. Invalidates
-    iterators and references at or after the point of the erase, including the
-    end() iterator. The iterator @a first does not need to be dereferenceable
-    if `first == last`: erasing an empty range is a no-op.
+    Removes the element specified by the range `[first; last)`. The iterator @a
+    first does not need to be dereferenceable if `first == last`: erasing an
+    empty range is a no-op.
 
-    If called on a primitive type other than null, the resulting JSON value
+    If called on a primitive type other than `null`, the resulting JSON value
     will be `null`.
 
     @param[in] first iterator to the beginning of the range to remove
     @param[in] last iterator past the end of the range to remove
     @return Iterator following the last removed element. If the iterator @a
-    second refers to the last element, the end() iterator is returned.
+    second refers to the last element, the `end()` iterator is returned.
 
     @tparam InteratorType an @ref iterator or @ref const_iterator
+
+    @post Invalidates iterators and references at or after the point of the
+    erase, including the `end()` iterator.
 
     @throw std::domain_error if called on a `null` value; example: `"cannot use
     erase() with null"`
@@ -3818,9 +3842,12 @@ class basic_json
 
     @param[in] key value of the elements to remove
 
-    @return Number of elements removed. If ObjectType is the default `std::map`
-    type, the return value will always be `0` (@a key was not found) or `1` (@a
-    key was found).
+    @return Number of elements removed. If @a ObjectType is the default
+    `std::map` type, the return value will always be `0` (@a key was not found)
+    or `1` (@a key was found).
+
+    @post References and iterators to the erased elements are invalidated.
+    Other references and iterators are not affected.
 
     @throw std::domain_error when called on a type other than JSON object;
     example: `"cannot use erase() with null"`
@@ -3893,6 +3920,16 @@ class basic_json
             throw std::domain_error("cannot use erase() with " + type_name());
         }
     }
+
+    /// @}
+
+
+    ////////////
+    // lookup //
+    ////////////
+
+    /// @name lookup
+    /// @{
 
     /*!
     @brief find an element in a JSON object
@@ -7933,9 +7970,9 @@ basic_json_parser_63:
                 return;
             }
 
-            const ssize_t offset_start = m_start - m_content;
-            const ssize_t offset_marker = m_marker - m_start;
-            const ssize_t offset_cursor = m_cursor - m_start;
+            const auto offset_start = m_start - m_content;
+            const auto offset_marker = m_marker - m_start;
+            const auto offset_cursor = m_cursor - m_start;
 
             m_buffer.erase(0, static_cast<size_t>(offset_start));
             std::string line;
