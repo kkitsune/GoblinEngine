@@ -14,7 +14,6 @@ public:
 	virtual ~ExampleScreen()
 	{ }
 
-
 	virtual bool keyboard_event(Key code, int, Action action, int) override
 	{
 		if(code == Key::Escape && action == Action::Press)
