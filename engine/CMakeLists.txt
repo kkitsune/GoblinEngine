@@ -46,12 +46,15 @@ add_library(engine SHARED
 		include/engine/InputEnums.hpp
 		include/engine/Painter.hpp
 		include/engine/Engine.hpp
+		include/engine/Scene.hpp
+		include/engine/Time.hpp
 
 		source/resource/Texture.cpp
 		source/resource/Shader.cpp
 		source/Application.cpp
 		source/Painter.cpp
-		source/Engine.cpp)
+		source/Engine.cpp
+		source/Scene.cpp)
 
 target_include_directories(engine PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

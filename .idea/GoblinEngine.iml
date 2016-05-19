@@ -23,12 +23,12 @@
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Engine.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/InputEnums.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Application.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Scene.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Time.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/KHR/khrplatform.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/glad/glad.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/Engine.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/Painter.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/Application.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/resource/Texture.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/resource/Shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/stb_truetype.h" isTestSource="false" />
@@ -48,6 +48,9 @@
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_impl_glfw_gl3.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_draw.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/glad/glad.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/Application.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/Scene.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/Painter.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/compile-options.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/game/main.cpp" isTestSource="false" />

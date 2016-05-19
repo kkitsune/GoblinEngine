@@ -50,7 +50,6 @@ public:
 		             ImGuiWindowFlags_NoTitleBar |
 		             ImGuiWindowFlags_NoMove |
 		             ImGuiWindowFlags_NoResize |
-		             //ImGuiWindowFlags_MenuBar |
 					 ImGuiWindowFlags_NoFocusOnAppearing |
 					 ImGuiWindowFlags_NoBringToFrontOnFocus |
 					 ImGuiWindowFlags_NoSavedSettings);
@@ -74,7 +73,7 @@ public:
 	{
 		if(key == Key::Escape && action == Action::Press)
 		{
-			cerr << "Testgame => Escape pressed" << endl;
+			cerr << "TestGame => Escape pressed" << endl;
 			engine().exit();
 		}
 	}
