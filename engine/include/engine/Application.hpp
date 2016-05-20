@@ -30,7 +30,7 @@ public:
 	virtual void frame_start()
 	{ }
 
-	virtual void frame(Seconds time)
+	virtual void frame(Seconds)
 	{ }
 
 	virtual void frame_end()

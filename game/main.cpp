@@ -33,7 +33,7 @@ public:
 
 	virtual void update(Seconds time) override
 	{
-		ImGui::Text("Frame time : %F", time);
+		ImGui::Text("Frame time : %f", time);
 	}
 
 	virtual void frame_start() override
