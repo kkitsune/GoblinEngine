@@ -58,17 +58,24 @@ int Engine::run(Application* app)
 	setup_events();
 	app->initialize();
 
+	Seconds last_time = time_now();
 	while(_running)
 	{
 		_running = glfwWindowShouldClose(_wnd) == 0;
+
+		Seconds current = time_now();
+		Seconds frame_time = current - last_time;
+		last_time = current;
+
 		glfwPollEvents();
 		ImGui_ImplGlfwGL3_NewFrame();
 
-		app->update();
+		app->update(frame_time);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		app->frame_start();
+		app->frame(frame_time);
 		app->frame_end();
 
 		ImGui::Render();

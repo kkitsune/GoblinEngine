@@ -2,6 +2,7 @@
 
 #include <engine/InputEnums.hpp>
 #include <engine/Engine.hpp>
+#include <engine/Time.hpp>
 
 class ENGINE_API Application
 {
@@ -24,9 +25,12 @@ public:
 
 	virtual void initialize() = 0;
 
-	virtual void update() = 0;
+	virtual void update(Seconds time) = 0;
 
 	virtual void frame_start()
+	{ }
+
+	virtual void frame(Seconds time)
 	{ }
 
 	virtual void frame_end()
