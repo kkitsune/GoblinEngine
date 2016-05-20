@@ -43,7 +43,7 @@ int Engine::run(Application* app)
 	glEnable(GL_CULL_FACE);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 	glfwSwapBuffers(_wnd);
 
 #if defined(__APPLE__)

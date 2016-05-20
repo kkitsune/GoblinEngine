@@ -31,10 +31,8 @@ public:
 		if(_main_size < 350.f) _main_size = 350.f;
 	}
 
-	virtual void update(Seconds time) override
-	{
-		ImGui::Text("Frame time : %f", time);
-	}
+	virtual void update(Seconds) override
+	{ }
 
 	virtual void frame_start() override
 	{ }
