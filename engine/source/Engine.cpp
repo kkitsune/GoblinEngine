@@ -58,14 +58,10 @@ int Engine::run(Application* app)
 	setup_events();
 	app->initialize();
 
-	Seconds last_time = time_now();
 	while(_running)
 	{
 		_running = glfwWindowShouldClose(_wnd) == 0;
-
-		Seconds current = time_now();
-		Seconds frame_time = current - last_time;
-		last_time = current;
+		Seconds frame_time = ImGui::GetIO().DeltaTime;
 
 		glfwPollEvents();
 		ImGui_ImplGlfwGL3_NewFrame();

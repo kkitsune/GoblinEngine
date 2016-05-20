@@ -32,7 +32,9 @@ public:
 	}
 
 	virtual void update(Seconds time) override
-	{ }
+	{
+		ImGui::Text("Frame time : %F", time);
+	}
 
 	virtual void frame_start() override
 	{ }
