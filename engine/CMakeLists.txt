@@ -31,6 +31,18 @@ add_library(engine SHARED
 		source/deps/imgui/imgui_draw.cpp
 		source/deps/imgui/imgui.cpp
 
+		include/engine/utils/string_id/basic_database.hpp
+		include/engine/utils/string_id/generator.hpp
+		include/engine/utils/string_id/string_id.hpp
+		include/engine/utils/string_id/database.hpp
+		include/engine/utils/string_id/config.hpp
+		include/engine/utils/string_id/error.hpp
+		include/engine/utils/string_id/hash.hpp
+		source/utils/string_id/generator.cpp
+		source/utils/string_id/string_id.cpp
+		source/utils/string_id/database.cpp
+		source/utils/string_id/error.cpp
+
 		include/engine/utils/BitmaskOperators.hpp
 		include/engine/utils/Json.hpp
 		include/engine/utils/Sol.hpp

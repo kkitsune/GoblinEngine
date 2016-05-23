@@ -11,15 +11,22 @@
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Sampler.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Framebuffer.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Shader.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Handle.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Texture.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Buffer.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Handle.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/VertexArray.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Buffer.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/BitmaskOperators.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/imgui.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/imconfig.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/Sol.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/Json.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/imgui.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/string_id/string_id.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/string_id/config.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/string_id/basic_database.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/string_id/hash.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/string_id/generator.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/string_id/database.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/string_id/error.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Engine.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/InputEnums.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Application.hpp" isTestSource="false" />
@@ -28,27 +35,31 @@
       <sourceFolder url="file://$MODULE_DIR$/engine/include/KHR/khrplatform.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/glad/glad.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/Application.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/Engine.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/resource/Texture.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/resource/Shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/stb_truetype.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/nanovg_gl_utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/fontstash.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/nanovg.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/nanovg_gl.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/fontstash.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/nanovg_gl_utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/nanovg.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/nanovg/stb_image.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/glad/glad.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/stb_truetype.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_impl_glfw_gl3.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_impl_glfw_gl3.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/stb_rect_pack.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_demo.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/stb_textedit.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_impl_glfw_gl3.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_impl_glfw_gl3.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_internal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/imgui/imgui_draw.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/deps/glad/glad.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/source/Application.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/utils/string_id/string_id.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/utils/string_id/database.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/utils/string_id/generator.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/source/utils/string_id/error.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/Scene.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/Painter.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/compile-options.cmake" isTestSource="false" />
