@@ -33,6 +33,7 @@
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Scene.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Time.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/KHR/khrplatform.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/doctest/doctest.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/glad/glad.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/source/Application.cpp" isTestSource="false" />

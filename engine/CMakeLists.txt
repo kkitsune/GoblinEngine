@@ -11,6 +11,8 @@ add_library(engine SHARED
 		include/glad/glad.h
 		source/deps/glad/glad.c
 
+		include/doctest/doctest.h
+
 		source/deps/nanovg/nanovg_gl_utils.h
 		source/deps/nanovg/stb_truetype.h
 		source/deps/nanovg/nanovg_gl.h
