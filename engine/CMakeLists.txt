@@ -39,6 +39,9 @@ add_library(engine SHARED
 		include/engine/utils/Json.hpp
 		include/engine/utils/Sol.hpp
 
+		include/engine/scene/Node.hpp
+		source/scene/Node.cpp
+
 		include/engine/resource/VertexArray.hpp
 		include/engine/resource/Framebuffer.hpp
 		include/engine/resource/Texture.hpp
