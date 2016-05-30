@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
+#include <array>
 
 enum class Winding
 {
@@ -138,6 +139,8 @@ public:
 
 	int create_image(std::string const& file, ImageFlags flags);
 
+	int create_image(unsigned char const* data, int size, ImageFlags flags);
+
 	glm::ivec2 image_size(int id);
 
 	void delete_image(int id);
@@ -215,6 +218,17 @@ public:
 	Paint radial_gradient(glm::vec2 const& center, float in_radius, float out_radius, glm::vec4 const& start_color, glm::vec4 const& end_color);
 
 	Paint image_pattern(glm::vec2 const& origin, glm::vec2 const& extent, float angle, int image, float alpha);
+
+	inline int create_image(std::vector<unsigned char> const& data, ImageFlags flags)
+	{
+		return create_image(&data[0], (int) data.size(), flags);
+	}
+
+	template<size_t Size>
+	inline int create_image(std::array<unsigned char, Size> const& data, ImageFlags flags)
+	{
+		return create_image(&data[0], (int) Size, flags);
+	}
 
 private:
 	struct NVGcontext* _vg;

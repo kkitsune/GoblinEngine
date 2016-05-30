@@ -187,6 +187,11 @@ int Painter::create_image(string const& file, ImageFlags flags)
 	return nvgCreateImage(_vg, file.c_str(), static_cast<int>(flags));
 }
 
+int Painter::create_image(unsigned char const* data, int size, ImageFlags flags)
+{
+	return nvgCreateImageMem(_vg, static_cast<int>(flags), data, size);
+}
+
 ivec2 Painter::image_size(int id)
 {
 	ivec2 ret;
