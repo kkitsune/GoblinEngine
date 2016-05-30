@@ -33,18 +33,6 @@ add_library(engine SHARED
 		source/deps/imgui/imgui_draw.cpp
 		source/deps/imgui/imgui.cpp
 
-		include/engine/utils/string_id/basic_database.hpp
-		include/engine/utils/string_id/generator.hpp
-		include/engine/utils/string_id/string_id.hpp
-		include/engine/utils/string_id/database.hpp
-		include/engine/utils/string_id/config.hpp
-		include/engine/utils/string_id/error.hpp
-		include/engine/utils/string_id/hash.hpp
-		source/utils/string_id/generator.cpp
-		source/utils/string_id/string_id.cpp
-		source/utils/string_id/database.cpp
-		source/utils/string_id/error.cpp
-
 		include/engine/utils/BitmaskOperators.hpp
 		include/engine/utils/Json.hpp
 		include/engine/utils/Sol.hpp
@@ -60,15 +48,13 @@ add_library(engine SHARED
 		include/engine/InputEnums.hpp
 		include/engine/Painter.hpp
 		include/engine/Engine.hpp
-		include/engine/Scene.hpp
 		include/engine/Time.hpp
 
 		source/resource/Texture.cpp
 		source/resource/Shader.cpp
 		source/Application.cpp
 		source/Painter.cpp
-		source/Engine.cpp
-		source/Scene.cpp)
+		source/Engine.cpp)
 
 target_include_directories(engine PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
