@@ -2,10 +2,12 @@
 #include <engine/Painter.hpp>
 #include <glad/glad.h>
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
 #define NANOVG_GL3_IMPLEMENTATION
-
 #include "deps/nanovg/nanovg.h"
 #include "deps/nanovg/nanovg_gl.h"
+#pragma GCC diagnostic pop
 
 using namespace glm;
 using namespace std;
