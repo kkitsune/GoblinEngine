@@ -46,6 +46,7 @@ struct enable_bitmask_operators<Align>
 
 enum class ImageFlags
 {
+	None = 0,
 	GenerateMipmaps = 1 << 0,
 	RepeatX = 1 << 1,
 	RepeatY = 1 << 2,
