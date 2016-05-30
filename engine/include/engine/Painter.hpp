@@ -78,10 +78,12 @@ struct Paint
 
 class ENGINE_API Painter final
 {
+	friend class Blendish;
+
 public:
 	Painter();
 
-	virtual ~Painter();
+	~Painter();
 
 	Painter(Painter const& other) = delete;
 

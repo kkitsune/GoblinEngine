@@ -20,6 +20,8 @@ add_library(engine SHARED
 		source/deps/nanovg/fontstash.h
 		source/deps/nanovg/nanovg.h
 		source/deps/nanovg/nanovg.c
+		source/deps/nanovg/blender_icons.h
+		source/deps/nanovg/blendish.h
 
 		include/engine/utils/imconfig.h
 		include/engine/utils/imgui.h
@@ -46,6 +48,7 @@ add_library(engine SHARED
 		include/engine/resource/Handle.hpp
 		include/engine/Application.hpp
 		include/engine/InputEnums.hpp
+		include/engine/Blendish.hpp
 		include/engine/Painter.hpp
 		include/engine/Engine.hpp
 		include/engine/Time.hpp
@@ -53,6 +56,7 @@ add_library(engine SHARED
 		source/resource/Texture.cpp
 		source/resource/Shader.cpp
 		source/Application.cpp
+		source/Blendish.cpp
 		source/Painter.cpp
 		source/Engine.cpp)
 
