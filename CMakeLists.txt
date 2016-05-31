@@ -22,7 +22,7 @@ set(CMAKE_BUILD_WITH_INSTALL_RPATH    FALSE) # Use CMAKE_INSTALL_RPATH for INSTA
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE) # Do NOT add path to dependencies for INSTALL
 
 find_package(PkgConfig REQUIRED)
-find_package(Boost REQUIRED COMPONENTS filesystem system)
+find_package(Poco REQUIRED COMPONENTS Foundation Net)
 
 enable_testing()
 add_subdirectory(engine)

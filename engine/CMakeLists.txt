@@ -86,7 +86,7 @@ find_package(OpenGL REQUIRED)
 find_package(Lua REQUIRED)
 
 target_link_libraries(engine ${DEFAULT_LINKER_OPTIONS}
-		${Boost_LIBRARIES} ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES} ${LUA_LIBRARIES})
+		Poco::Foundation Poco::Net ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES} ${LUA_LIBRARIES})
 
 install(TARGETS engine
 		ARCHIVE  DESTINATION lib

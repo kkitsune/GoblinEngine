@@ -1,10 +1,10 @@
 #include <engine/resource/Shader.hpp>
 
-#include <boost/filesystem/fstream.hpp>
-#include <boost/filesystem.hpp>
+#include <Poco/File.h>
+#include <fstream>
 #include <regex>
 
-using namespace boost::filesystem;
+using namespace std;
 
 Shader::Shader() : Handle()
 {
@@ -35,7 +35,7 @@ namespace internal
 
 	static std::vector<std::string> load_file(std::string const& name)
 	{
-		if(!exists(name)) throw std::invalid_argument("Shader '" + name + "' does not exist");
+		if(!Poco::File(name).exists()) throw std::invalid_argument("Shader '" + name + "' does not exist");
 		ifstream file(name);
 		std::vector<std::string> ret;
 

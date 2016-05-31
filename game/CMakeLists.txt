@@ -4,7 +4,7 @@ add_executable(game MACOSX_BUNDLE
 		main.cpp)
 
 target_link_libraries(game ${DEFAULT_LINKER_OPTIONS}
-		${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${LUA_LIBRARIES} engine)
+		Poco::Foundation Poco::Net ${OPENGL_LIBRARIES} ${LUA_LIBRARIES} engine)
 
 target_compile_options(game
 		PRIVATE ${DEFAULT_COMPILE_OPTIONS})
