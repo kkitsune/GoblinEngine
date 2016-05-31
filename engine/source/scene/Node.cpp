@@ -15,10 +15,15 @@ mat4 Node::Transform::calculate() const
 	return ret;
 }
 
-Node::Node(weak_ptr<Node> const& parent) : _parent(parent)
-{
-}
+Node::Node() : _parent{}, _name{}, _children{}
+{ }
 
 Node::~Node()
+{ }
+
+void Node::add_child(std::string const& name, std::shared_ptr<Node> const& node)
 {
+	node->parent(shared_from_this());
+	node->name(name);
+	_children.push_front(node);
 }
