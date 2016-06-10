@@ -36,6 +36,7 @@ add_library(engine SHARED
 		source/deps/imgui/imgui.cpp
 
 		include/engine/utils/BitmaskOperators.hpp
+		include/engine/utils/Mustache.hpp
 		include/engine/utils/Json.hpp
 		include/engine/utils/Sol.hpp
 

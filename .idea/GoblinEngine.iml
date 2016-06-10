@@ -11,10 +11,11 @@
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Application.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/scene/Node.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/BitmaskOperators.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/imgui.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/Mustache.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/imconfig.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/Sol.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/Json.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/utils/imgui.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/Engine.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/InputEnums.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/include/engine/resource/Sampler.hpp" isTestSource="false" />
