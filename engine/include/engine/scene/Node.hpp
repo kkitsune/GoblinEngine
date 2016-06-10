@@ -10,7 +10,7 @@
 #include <memory>
 #include <string>
 
-class ENGINE_API Node : public std::enable_shared_from_this<Node>
+class ENGINE_API Node : private std::enable_shared_from_this<Node>
 {
 public:
 	struct Transform
@@ -42,6 +42,12 @@ public:
 	Node& operator=(Node const& other) = delete;
 
 	Node& operator=(Node&& other) = default;
+
+	inline std::shared_ptr<const Node> pointer() const
+	{ return shared_from_this(); }
+
+	inline std::shared_ptr<Node> pointer()
+	{ return shared_from_this(); }
 
 	virtual inline Transform const& transform() const
 	{ return _transform; }
