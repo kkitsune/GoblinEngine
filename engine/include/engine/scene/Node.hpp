@@ -10,11 +10,6 @@
 #include <functional>
 #include <memory>
 #include <string>
-#include <array>
-
-template<typename... Args>
-struct Types
-{ };
 
 class ENGINE_API Node : private std::enable_shared_from_this<Node>
 {
