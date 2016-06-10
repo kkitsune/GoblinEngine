@@ -3,12 +3,18 @@
 #include <engine/config.h>
 
 #include <glm/gtc/quaternion.hpp>
+#include <ctti/type_id.hpp>
 #include <forward_list>
 #include <type_traits>
 #include <glm/glm.hpp>
 #include <functional>
 #include <memory>
 #include <string>
+#include <array>
+
+template<typename... Args>
+struct Types
+{ };
 
 class ENGINE_API Node : private std::enable_shared_from_this<Node>
 {
@@ -49,6 +55,9 @@ public:
 	inline std::shared_ptr<Node> pointer()
 	{ return shared_from_this(); }
 
+	virtual inline std::string type_name() const
+	{ return ctti::type_id<Node>().name().c_str(); }
+
 	virtual inline Transform const& transform() const
 	{ return _transform; }
 
@@ -77,7 +86,7 @@ public:
 	{ return _children; }
 
 	template<class NodeT, typename... Args>
-	inline std::shared_ptr<NodeT> add_child(std::string const& name, Args&&... args)
+	inline std::shared_ptr<NodeT> add_child(std::string const& name, Args&& ... args)
 	{
 		static_assert(std::is_base_of<Node, NodeT>::value, "Node Type must be a subclass of Node");
 		static_assert(std::is_constructible<NodeT, Args...>::value, "Node Type must have a matching constructor");
@@ -86,14 +95,22 @@ public:
 		return child;
 	}
 
+	inline void accept(std::function<void(std::shared_ptr<Node> const&)> const& visitor)
+	{
+		for(auto child : _children)
+			child->accept(visitor);
+
+		visitor(pointer());
+	}
+
 	virtual inline void begin_frame()
-	{ for(auto child: _children) child->begin_frame(); }
+	{ for (auto child : _children) child->begin_frame(); }
 
 	virtual inline void draw()
-	{ for(auto child: _children) child->draw(); }
+	{ for (auto child : _children) child->draw(); }
 
 	virtual inline void end_frame()
-	{ for(auto child: _children) child->end_frame(); }
+	{ for (auto child : _children) child->end_frame(); }
 
 protected:
 	virtual void add_child(std::string const& name, std::shared_ptr<Node> const& node);
