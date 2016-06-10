@@ -23,7 +23,7 @@ Node::~Node()
 
 void Node::add_child(std::string const& name, std::shared_ptr<Node> const& node)
 {
-	node->parent(shared_from_this());
+	node->parent(pointer());
 	node->name(name);
 	_children.push_front(node);
 }

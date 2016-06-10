@@ -85,7 +85,7 @@ public:
 	{
 		static_assert(std::is_base_of<Node, NodeT>::value, "Node Type must be a subclass of Node");
 		static_assert(std::is_constructible<NodeT, Args...>::value, "Node Type must have a matching constructor");
-		auto child = std::make_shared<NodeT>(std::forward<Args>(args)..., pointer());
+		auto child = std::make_shared<NodeT>(std::forward<Args>(args)...);
 		add_child(name, std::dynamic_pointer_cast<Node>(child));
 		return child;
 	}
