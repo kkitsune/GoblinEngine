@@ -23,14 +23,17 @@ public:
 	Engine& engine()
 	{ return *_engine; }
 
+	virtual Seconds fixed_time_step() const
+	{ return 1.f / 30.f; }
+
 	virtual void initialize() = 0;
 
-	virtual void update(Seconds time) = 0;
+	virtual void update(Seconds delta) = 0;
 
 	virtual void frame_start()
 	{ }
 
-	virtual void frame(Seconds)
+	virtual void frame()
 	{ }
 
 	virtual void frame_end()

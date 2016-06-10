@@ -9,6 +9,7 @@ class TestGame : public Application
 {
 	float _main_size;
 	bool _show_metrics, _show_test;
+	Seconds _start;
 
 public:
 	TestGame(Engine* e) : Application(e), _show_metrics(false), _show_test(false)
@@ -29,10 +30,14 @@ public:
 		cerr << "TestGame => Initialized" << endl;
 		_main_size = (float) engine().framebuffer_size().x / 4.f;
 		if(_main_size < 350.f) _main_size = 350.f;
+
+		_start = time_now();
 	}
 
-	virtual void update(Seconds) override
-	{ }
+	virtual void update(Seconds delta) override
+	{
+		cout << "Delta : " << delta << " / " << fixed_time_step() << endl;
+	}
 
 	virtual void frame_start() override
 	{ }

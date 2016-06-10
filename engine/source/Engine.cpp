@@ -43,7 +43,7 @@ int Engine::run(Application* app)
 	glEnable(GL_CULL_FACE);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	glfwSwapInterval(1);
+	glfwSwapInterval(0);
 	glfwSwapBuffers(_wnd);
 
 #if defined(__APPLE__)
@@ -58,20 +58,25 @@ int Engine::run(Application* app)
 	setup_events();
 	app->initialize();
 
+	Seconds accumulator = 0.f;
 	while(_running)
 	{
 		_running = glfwWindowShouldClose(_wnd) == 0;
-		Seconds frame_time = ImGui::GetIO().DeltaTime;
+		accumulator += ImGui::GetIO().DeltaTime;
 
 		glfwPollEvents();
 		ImGui_ImplGlfwGL3_NewFrame();
 
-		app->update(frame_time);
+		if(accumulator >= app->fixed_time_step())
+		{
+			app->update(accumulator);
+			accumulator = 0.f;
+		}
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		app->frame_start();
-		app->frame(frame_time);
+		app->frame();
 		app->frame_end();
 
 		ImGui::Render();
