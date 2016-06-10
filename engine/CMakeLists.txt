@@ -40,6 +40,103 @@ add_library(engine SHARED
 		include/engine/utils/Json.hpp
 		include/engine/utils/Sol.hpp
 
+		include/ponder/detail/variant_recursive_wrapper.hpp
+		include/ponder/detail/simplepropertyimpl.hpp
+		include/ponder/detail/simplepropertyimpl.inl
+		include/ponder/detail/arraypropertyimpl.hpp
+		include/ponder/detail/arraypropertyimpl.inl
+		include/ponder/detail/enumpropertyimpl.hpp
+		include/ponder/detail/enumpropertyimpl.inl
+		include/ponder/detail/userpropertyimpl.hpp
+		include/ponder/detail/userpropertyimpl.inl
+		include/ponder/detail/observernotifier.hpp
+		include/ponder/detail/constructorimpl.hpp
+		include/ponder/detail/propertyfactory.hpp
+		include/ponder/detail/functiontraits.hpp
+		include/ponder/detail/issmartpointer.hpp
+		include/ponder/detail/valueprovider.hpp
+		include/ponder/detail/classmanager.hpp
+		include/ponder/detail/functionimpl.hpp
+		include/ponder/detail/objectholder.hpp
+		include/ponder/detail/objectholder.inl
+		include/ponder/detail/objecttraits.hpp
+		include/ponder/detail/enummanager.hpp
+		include/ponder/detail/returntype.hpp
+		include/ponder/detail/dictionary.hpp
+		include/ponder/detail/valueimpl.hpp
+		include/ponder/detail/yesnotype.hpp
+		include/ponder/detail/yesnotype.hpp
+		include/ponder/detail/variant.hpp
+		include/ponder/detail/rawtype.hpp
+		include/ponder/detail/getter.hpp
+		include/ponder/detail/getter.inl
+		include/ponder/detail/typeid.hpp
+		include/ponder/detail/util.hpp
+		include/ponder/simpleproperty.hpp
+		include/ponder/arrayproperty.hpp
+		include/ponder/classvisitor.hpp
+		include/ponder/valuevisitor.hpp
+		include/ponder/userproperty.hpp
+		include/ponder/classbuilder.hpp
+		include/ponder/classbuilder.inl
+		include/ponder/enumproperty.hpp
+		include/ponder/constructor.hpp
+		include/ponder/arraymapper.hpp
+		include/ponder/valuemapper.hpp
+		include/ponder/enumbuilder.hpp
+		include/ponder/pondertype.hpp
+		include/ponder/enumobject.hpp
+		include/ponder/enumobject.inl
+		include/ponder/userobject.hpp
+		include/ponder/userobject.inl
+		include/ponder/tagholder.hpp
+		include/ponder/classcast.hpp
+		include/ponder/classget.hpp
+		include/ponder/classget.inl
+		include/ponder/function.hpp
+		include/ponder/observer.hpp
+		include/ponder/property.hpp
+		include/ponder/enumget.hpp
+		include/ponder/enumget.inl
+		include/ponder/config.hpp
+		include/ponder/errors.hpp
+		include/ponder/error.hpp
+		include/ponder/error.inl
+		include/ponder/value.inl
+		include/ponder/value.hpp
+		include/ponder/class.hpp
+		include/ponder/class.inl
+		include/ponder/type.hpp
+		include/ponder/args.hpp
+		include/ponder/enum.hpp
+		include/ponder/enum.inl
+		include/ponder/format.h
+		source/deps/ponder/observernotifier.cpp
+		source/deps/ponder/simpleproperty.cpp
+		source/deps/ponder/arrayproperty.cpp
+		source/deps/ponder/classmanager.cpp
+		source/deps/ponder/classvisitor.cpp
+		source/deps/ponder/userproperty.cpp
+		source/deps/ponder/enumproperty.cpp
+		source/deps/ponder/enumbuilder.cpp
+		source/deps/ponder/enummanager.cpp
+		source/deps/ponder/userobject.cpp
+		source/deps/ponder/pondertype.cpp
+		source/deps/ponder/enumobject.cpp
+		source/deps/ponder/tagholder.cpp
+		source/deps/ponder/classcast.cpp
+		source/deps/ponder/function.cpp
+		source/deps/ponder/property.cpp
+		source/deps/ponder/observer.cpp
+		source/deps/ponder/format.cpp
+		source/deps/ponder/errors.cpp
+		source/deps/ponder/class.cpp
+		source/deps/ponder/value.cpp
+		source/deps/ponder/error.cpp
+		source/deps/ponder/args.cpp
+		source/deps/ponder/util.cpp
+		source/deps/ponder/enum.cpp
+
 		include/engine/scene/Node.hpp
 		source/scene/Node.cpp
 
@@ -79,7 +176,7 @@ target_compile_options(engine
 		PRIVATE ${DEFAULT_COMPILE_OPTIONS})
 
 target_compile_definitions(engine
-		PRIVATE ${DEFAULT_COMPILE_DEFINITIONS} engine_EXPORTS GLAD_GLAPI_EXPORT_BUILD
+		PRIVATE ${DEFAULT_COMPILE_DEFINITIONS} engine_EXPORTS GLAD_GLAPI_EXPORT_BUILD PONDER_EXPORTS
 		PUBLIC GLAD_GLAPI_EXPORT GLM_FORCE_RADIANS GLM_FORCE_SSE2)
 
 pkg_search_module(GLFW REQUIRED glfw3)
