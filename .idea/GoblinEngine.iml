@@ -69,8 +69,8 @@
           <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/GoblinEngine-16fac8e4/16fac8e4/Debug/engine/include" />
           <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/GoblinEngine-16fac8e4/16fac8e4/MinSizeRel/engine/include" />
           <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/GoblinEngine-16fac8e4/16fac8e4/RelWithDebInfo/engine/include" />
-          <root url="file://C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/5.3.0/include-fixed" />
-          <root url="file://C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/5.3.0/include" />
+          <root url="file://C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/5.4.0/include" />
+          <root url="file://C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/5.4.0/include-fixed" />
           <root url="file://C:/msys64/mingw64/x86_64-w64-mingw32/include" />
           <root url="file://C:/msys64/mingw64/include" />
         </CLASSES>
@@ -79,8 +79,8 @@
           <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/GoblinEngine-16fac8e4/16fac8e4/Debug/engine/include" />
           <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/GoblinEngine-16fac8e4/16fac8e4/MinSizeRel/engine/include" />
           <root url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/GoblinEngine-16fac8e4/16fac8e4/RelWithDebInfo/engine/include" />
-          <root url="file://C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/5.3.0/include-fixed" />
-          <root url="file://C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/5.3.0/include" />
+          <root url="file://C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/5.4.0/include" />
+          <root url="file://C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/5.4.0/include-fixed" />
           <root url="file://C:/msys64/mingw64/x86_64-w64-mingw32/include" />
           <root url="file://C:/msys64/mingw64/include" />
         </SOURCES>
