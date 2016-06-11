@@ -65,13 +65,10 @@ public:
 	virtual inline void name(std::string const& name)
 	{ _name = name; }
 
-	virtual inline std::weak_ptr<const Node> parent() const
-	{ return _parent; }
+	virtual inline std::shared_ptr<Node> parent() const
+	{ return _parent.lock(); }
 
-	virtual inline std::weak_ptr<Node> parent()
-	{ return _parent; }
-
-	virtual inline void parent(std::weak_ptr<Node> const& node)
+	virtual inline void parent(std::shared_ptr<Node> const& node)
 	{ _parent = node; }
 
 	virtual inline std::forward_list<std::shared_ptr<Node>> const& children() const
