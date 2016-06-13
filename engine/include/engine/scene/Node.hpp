@@ -11,7 +11,15 @@
 #include <memory>
 #include <string>
 
-class ENGINE_API Node : private std::enable_shared_from_this<Node>
+struct Component
+{
+	virtual ~Component()
+	{ }
+
+	std::weak_ptr<class Node> node;
+};
+
+class ENGINE_API Node : public std::enable_shared_from_this<Node>
 {
 public:
 	struct Transform
@@ -77,15 +85,14 @@ public:
 	virtual inline std::forward_list<std::shared_ptr<Node>>& children()
 	{ return _children; }
 
-	template<class NodeT, typename... Args>
-	inline std::shared_ptr<NodeT> add_child(std::string const& name, Args&& ... args)
+	inline std::shared_ptr<Node> create_child(std::string const& name)
 	{
-		static_assert(std::is_base_of<Node, NodeT>::value, "Node Type must be a subclass of Node");
-		static_assert(std::is_constructible<NodeT, Args...>::value, "Node Type must have a matching constructor");
-		auto child = std::make_shared<NodeT>(std::forward<Args>(args)...);
-		add_child(name, std::dynamic_pointer_cast<Node>(child));
+		auto child = std::make_shared<Node>();
+		add_child(name, child);
 		return child;
 	}
+
+	virtual void add_child(std::string const& name, std::shared_ptr<Node> const& node);
 
 	inline void accept(std::function<void(std::shared_ptr<Node> const&)> const& visitor)
 	{
@@ -95,18 +102,7 @@ public:
 		visitor(pointer());
 	}
 
-	virtual inline void begin_frame()
-	{ for (auto child : _children) child->begin_frame(); }
-
-	virtual inline void draw()
-	{ for (auto child : _children) child->draw(); }
-
-	virtual inline void end_frame()
-	{ for (auto child : _children) child->end_frame(); }
-
 protected:
-	virtual void add_child(std::string const& name, std::shared_ptr<Node> const& node);
-
 	std::weak_ptr<Node> _parent;
 	std::string _name;
 	Transform _transform;
