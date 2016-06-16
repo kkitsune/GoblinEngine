@@ -4,10 +4,12 @@
 
 #include <glm/gtc/quaternion.hpp>
 #include <ctti/type_id.hpp>
+#include <unordered_map>
 #include <forward_list>
 #include <type_traits>
 #include <glm/glm.hpp>
 #include <functional>
+#include <stdexcept>
 #include <memory>
 #include <string>
 
@@ -94,6 +96,43 @@ public:
 
 	virtual void add_child(std::string const& name, std::shared_ptr<Node> const& node);
 
+	template<typename CompT, typename... Args>
+	inline CompT& create_component(Args&& ... args) throw(std::invalid_argument)
+	{
+		static_assert(std::is_base_of<Component, CompT>::value, "Component Type must be a subclass of Component");
+		static_assert(std::is_constructible<CompT, Args...>::value, "Component Type must have a matching constructor");
+		if(_components.find(ctti::type_id<CompT>()) == _components.end())
+		{
+			CompT* ret = new CompT(std::forward<Args>(args)...);
+			_components[ctti::type_id<CompT>()] = ret;
+			return *ret;
+		}
+
+		throw std::invalid_argument("Component already exists");
+	}
+
+	template<typename CompT>
+	inline bool has_component() const
+	{ return _components.find(ctti::type_id<CompT>()) != _components.end(); }
+
+	template<typename CompT>
+	inline CompT const& component() const throw(std::invalid_argument)
+	{
+		if(_components.find(ctti::type_id<CompT>()) == _components.end())
+			return *(_components.at(ctti::type_id<CompT>()));
+
+		throw std::invalid_argument("Component does not exist");
+	}
+
+	template<typename CompT>
+	inline CompT& component() throw(std::invalid_argument)
+	{
+		if(_components.find(ctti::type_id<CompT>()) == _components.end())
+			return *(_components.at(ctti::type_id<CompT>()));
+
+		throw std::invalid_argument("Component does not exist");
+	}
+
 	inline void accept(std::function<void(std::shared_ptr<Node> const&)> const& visitor)
 	{
 		for(auto child : _children)
@@ -107,5 +146,6 @@ protected:
 	std::string _name;
 	Transform _transform;
 
+	std::unordered_map<ctti::type_index, Component*> _components;
 	std::forward_list<std::shared_ptr<Node>> _children;
 };
