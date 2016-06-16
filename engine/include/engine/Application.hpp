@@ -23,12 +23,12 @@ public:
 	Engine& engine()
 	{ return *_engine; }
 
-	virtual Seconds fixed_time_step() const
-	{ return 1.f / 30.f; }
+	virtual Duration fixed_time_step() const
+	{ return duration_cast<Duration>(std::chrono::duration<Duration::rep, std::ratio<1, 30>>{1}); }
 
 	virtual void initialize() = 0;
 
-	virtual void update(Seconds delta) = 0;
+	virtual void update(Duration delta) = 0;
 
 	virtual void frame_start()
 	{ }

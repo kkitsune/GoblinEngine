@@ -31,7 +31,7 @@ public:
 		if(_main_size < 350.f) _main_size = 350.f;
 	}
 
-	virtual void update(Seconds delta) override
+	virtual void update(Duration) override
 	{ }
 
 	virtual void frame_start() override

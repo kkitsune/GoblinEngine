@@ -58,11 +58,15 @@ int Engine::run(Application* app)
 	setup_events();
 	app->initialize();
 
-	Seconds accumulator = 0.f;
+	TimePoint last_time{};
+	Duration accumulator{};
 	while(_running)
 	{
 		_running = glfwWindowShouldClose(_wnd) == 0;
-		accumulator += ImGui::GetIO().DeltaTime;
+		TimePoint new_time = Clock::now();
+		Duration dT = new_time - last_time;
+		last_time = new_time;
+		accumulator += dT;
 
 		glfwPollEvents();
 		ImGui_ImplGlfwGL3_NewFrame();
@@ -70,7 +74,7 @@ int Engine::run(Application* app)
 		if(accumulator >= app->fixed_time_step())
 		{
 			app->update(accumulator);
-			accumulator = 0.f;
+			accumulator = Duration{};
 		}
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);

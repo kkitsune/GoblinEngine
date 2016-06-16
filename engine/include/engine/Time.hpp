@@ -2,11 +2,16 @@
 
 #include <chrono>
 
-typedef unsigned int FramesPerSecond;
-typedef float Seconds;
+using namespace std::chrono_literals;
 
-inline Seconds time_now()
+using std::chrono::duration_cast;
+
+typedef std::chrono::steady_clock Clock;
+typedef Clock::time_point TimePoint;
+typedef Clock::duration Duration;
+
+typedef float Seconds;
+inline Seconds as_seconds(Duration const& dT)
 {
-	using namespace std;
-	return chrono::duration_cast<chrono::duration<Seconds, ratio<1>>>(chrono::high_resolution_clock::now().time_since_epoch()).count();
+	return std::chrono::duration_cast<std::chrono::milliseconds>(dT).count() / 1000.f;
 }
