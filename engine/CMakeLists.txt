@@ -1,7 +1,9 @@
 add_subdirectory(libs)
 
-add_library(engine SHARED
+add_library(engine STATIC
+		include/engine/InputEnums.hpp
 		include/engine/Engine.hpp
+		include/engine/Math.hpp
 		source/Engine.cpp)
 
 target_include_directories(engine PUBLIC
@@ -17,9 +19,8 @@ target_compile_definitions(engine
 		PRIVATE ${DEFAULT_COMPILE_DEFINITIONS} E_ABI_engine
 		PUBLIC GLM_FORCE_RADIANS)
 
-target_link_libraries(engine
-		PRIVATE ${DEFAULT_LINKER_OPTIONS} ${SDL2_LIBRARIES} bgfx
-		PUBLIC glm spdlog type_safe ctti tweeny nlohmann_json)
+target_link_libraries(engine PUBLIC ${DEFAULT_LINKER_OPTIONS} ${SDL2_LIBRARIES}
+		glm bgfx spdlog type_safe ctti tweeny nlohmann_json)
 
 install(TARGETS engine
 		ARCHIVE  DESTINATION lib
