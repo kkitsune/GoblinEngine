@@ -14,3 +14,5 @@ set(CMAKE_BUILD_WITH_INSTALL_RPATH    FALSE)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
 cmake_policy(SET CMP0004 OLD)
+
+add_subdirectory(engine)
