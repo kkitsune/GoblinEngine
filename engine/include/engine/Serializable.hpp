@@ -9,7 +9,7 @@ class E_ABI(engine) Serializable
 {
 public:
 	virtual ~Serializable()
-	{ }
+	{}
 
 	virtual Json save() = 0;
 

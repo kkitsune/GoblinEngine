@@ -26,7 +26,7 @@ target_link_libraries(engine PUBLIC ${DEFAULT_LINKER_OPTIONS} ${SDL2_LIBRARIES}
 		glm bgfx spdlog type_safe ctti tweeny nlohmann_json)
 
 install(TARGETS engine
-		ARCHIVE  DESTINATION lib
-		LIBRARY  DESTINATION lib
-		RUNTIME  DESTINATION bin)
+		ARCHIVE DESTINATION lib
+		LIBRARY DESTINATION lib
+		RUNTIME DESTINATION bin)
 install(DIRECTORY include/ DESTINATION include)

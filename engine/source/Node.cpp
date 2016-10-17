@@ -2,10 +2,10 @@
 #include <engine/Node.hpp>
 
 Node::Node() : _parent{}, _pos{0.f, 0.f, 0.f}, _scale{1.f, 1.f, 1.f}, _rot{1.f, 0.f, 0.f, 0.f}
-{ }
+{}
 
 Node::~Node()
-{ }
+{}
 
 Json Node::save()
 {
@@ -32,14 +32,14 @@ Json Node::save()
 
 void Node::load(Json const& js)
 {
-	if(!js.is_object())
+	if (!js.is_object())
 		throw std::runtime_error("Node => Could not load Json : Json is not an object");
 }
 
 mat4 Node::world_transform() const
 {
 	mat4 ret{1.f};
-	if(auto parent = _parent.lock())
+	if (auto parent = _parent.lock())
 		ret *= parent->world_transform();
 
 	return ret * transform();

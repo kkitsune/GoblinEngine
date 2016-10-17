@@ -40,7 +40,7 @@ public:
 
 	virtual void keyboard_event(Key const& key, boolean const& down) override
 	{
-		if(key == Key::Escape && down)
+		if (key == Key::Escape && down)
 			engine().exit();
 	}
 

@@ -80,7 +80,7 @@ class E_ABI(engine) Application
 {
 public:
 	virtual ~Application()
-	{ }
+	{}
 
 	Application(Application const&) = delete;
 
@@ -98,26 +98,26 @@ public:
 	virtual void update() = 0;
 
 	virtual void mouse_button_event(ivec2 const&, MouseButton const&, boolean const&)
-	{ }
+	{}
 
 	virtual void mouse_move_event(ivec2 const&)
-	{ }
+	{}
 
 	virtual void scroll_event(ivec2 const&)
-	{ }
+	{}
 
 	virtual void keyboard_event(Key const&, boolean const&)
-	{ }
+	{}
 
 	virtual void keyboard_character_event(char const*)
-	{ }
+	{}
 
 	virtual void resize_event(u16 const&, u16 const&)
-	{ }
+	{}
 
 protected:
 	Application()
-	{ }
+	{}
 };
 
 template<class AppType>
