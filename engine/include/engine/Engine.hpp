@@ -1,6 +1,8 @@
 #pragma once
 
-class Engine final
+#include <ABI.h>
+
+class E_ABI(engine) Engine final
 {
 public:
 	Engine();

@@ -10,8 +10,6 @@ target_include_directories(engine PUBLIC
 		$<INSTALL_INTERFACE:include>
 		PRIVATE source)
 
-export(TARGETS engine FILE EngineConfig.cmake)
-
 target_compile_options(engine
 		PRIVATE ${DEFAULT_COMPILE_OPTIONS})
 
@@ -19,7 +17,8 @@ target_compile_definitions(engine
 		PRIVATE ${DEFAULT_COMPILE_DEFINITIONS} E_ABI_engine
 		PUBLIC GLM_FORCE_RADIANS)
 
-target_link_libraries(engine ${DEFAULT_LINKER_OPTIONS} ${SDL2_LIBRARIES} bgfx
+target_link_libraries(engine
+		PRIVATE ${DEFAULT_LINKER_OPTIONS} ${SDL2_LIBRARIES} bgfx
 		PUBLIC glm spdlog type_safe ctti tweeny nlohmann_json)
 
 install(TARGETS engine
