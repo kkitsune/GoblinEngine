@@ -3,6 +3,7 @@
 #include <ctti/type_id.hpp>
 #include <forward_list>
 #include <memory>
+#include <string>
 #include <ABI.h>
 
 #include "Serializable.hpp"
@@ -26,7 +27,7 @@ protected:
 class E_ABI(engine) Node : public Serializable, public std::enable_shared_from_this<Node>
 {
 public:
-	Node();
+	Node(std::string const& name = {});
 
 	virtual ~Node();
 
@@ -76,10 +77,13 @@ public:
 	inline void rotation(quat const& q)
 	{ _rot = q; }
 
+	std::shared_ptr<Node> create_child(std::string const& name = {});
+
 protected:
 	std::weak_ptr<Node> _parent;
 	vec3 _pos, _scale;
 	quat _rot;
+	std::string _name;
 
 	std::forward_list<std::pair<ctti::type_index, std::unique_ptr<Component>>> _components;
 	std::forward_list<std::shared_ptr<Node>> _children;

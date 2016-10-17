@@ -1,7 +1,9 @@
 #include <engine/Engine.hpp>
 #include <engine/Node.hpp>
 
-Node::Node() : _parent{}, _pos{0.f, 0.f, 0.f}, _scale{1.f, 1.f, 1.f}, _rot{1.f, 0.f, 0.f, 0.f}
+Node::Node(std::string const& name)
+		: _parent{}, _pos{0.f, 0.f, 0.f}, _scale{1.f, 1.f, 1.f}, _rot{1.f, 0.f, 0.f, 0.f},
+          _name{name}
 {}
 
 Node::~Node()
@@ -26,6 +28,7 @@ Json Node::save()
 			 (real::floating_point_type) _rot.z,
 			 (real::floating_point_type) _rot.w}
 	);
+	ret["name"] = Json{_name};
 
 	return ret;
 }
@@ -48,4 +51,12 @@ mat4 Node::world_transform() const
 mat4 Node::transform() const
 {
 	return glm::translate(mat4(1.f), _pos) * glm::mat4_cast(_rot) * glm::scale(mat4(1.f), _scale);
+}
+
+std::shared_ptr<Node> Node::create_child(std::string const& name)
+{
+	auto ret = std::make_shared<Node>(name);
+	ret->_parent = pointer();
+	_children.push_front(ret);
+	return ret;
 }
