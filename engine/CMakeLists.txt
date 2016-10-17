@@ -1,10 +1,13 @@
 add_subdirectory(libs)
 
-add_library(engine STATIC
+add_library(engine STATIC include/ABI.h
 		include/engine/InputEnums.hpp
+		include/engine/Serializable.hpp
 		include/engine/Engine.hpp
 		include/engine/Math.hpp
-		source/Engine.cpp)
+		include/engine/Node.hpp
+		source/Engine.cpp
+		source/Node.cpp)
 
 target_include_directories(engine PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -16,7 +19,7 @@ target_compile_options(engine
 		PRIVATE ${DEFAULT_COMPILE_OPTIONS})
 
 target_compile_definitions(engine
-		PRIVATE ${DEFAULT_COMPILE_DEFINITIONS} E_ABI_engine
+		PRIVATE ${DEFAULT_COMPILE_DEFINITIONS} E_ABI_engine E_ABI_STATIC_engine
 		PUBLIC GLM_FORCE_RADIANS)
 
 target_link_libraries(engine PUBLIC ${DEFAULT_LINKER_OPTIONS} ${SDL2_LIBRARIES}
