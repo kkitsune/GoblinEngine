@@ -1,3 +1,0 @@
-[submodule "external/debug_assert"]
-	path = external/debug_assert
-	url = git@github.com:foonathan/debug_assert
