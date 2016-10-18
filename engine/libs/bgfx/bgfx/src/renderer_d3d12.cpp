@@ -607,7 +607,7 @@ namespace bgfx { namespace d3d12
 								, desc.SubSysId
 								, desc.Revision
 								);
-						BX_TRACE("\tMemory: %" PRIi64 " (video), %" PRIi64 " (system), %" PRIi64 " (shared)"
+						BX_TRACE("\tMemory: %I64x" " (video), %I64x" " (system), %I64x" " (shared)"
 								, desc.DedicatedVideoMemory
 								, desc.DedicatedSystemMemory
 								, desc.SharedSystemMemory
@@ -4295,7 +4295,7 @@ data.NumQualityLevels = 0;
 					, srd
 					);
 				BX_CHECK(0 != result, "Invalid size"); BX_UNUSED(result);
-				BX_TRACE("Update subresource %" PRId64, result);
+				BX_TRACE("Update subresource %I64x", result);
 
 				setState(commandList, state);
 

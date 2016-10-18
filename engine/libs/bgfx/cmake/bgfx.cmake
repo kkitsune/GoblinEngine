@@ -47,7 +47,7 @@ if( UNIX AND NOT APPLE )
 endif()
 
 # Link against psapi in Visual Studio
-if( MSVC )
+if( WIN32 )
 	target_link_libraries( bgfx PUBLIC psapi )
 endif()
 
@@ -68,7 +68,7 @@ set_source_files_properties( ${BGFX_DIR}/src/amalgamated.mm PROPERTIES HEADER_FI
 set_source_files_properties( ${BGFX_DIR}/src/glcontext_ppapi.cpp PROPERTIES HEADER_FILE_ONLY ON )
 set_source_files_properties( ${BGFX_DIR}/src/glcontext_egl.cpp PROPERTIES HEADER_FILE_ONLY ON )
 
-if( APPLE OR MSVC )
+if( APPLE OR WIN32 )
 	set_source_files_properties( ${BGFX_DIR}/src/glcontext_glx.cpp PROPERTIES HEADER_FILE_ONLY ON )
 endif()
 

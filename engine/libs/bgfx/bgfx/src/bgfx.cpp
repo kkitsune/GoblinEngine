@@ -19,6 +19,7 @@
 #endif // BGFX_CONFIG_PROFILER_REMOTERY_BUILD_LIB
 
 #include <bx/crtimpl.h>
+#include <inttypes.h>
 #include "topology.h"
 
 namespace bgfx
@@ -1076,13 +1077,13 @@ namespace bgfx
 
 		BX_TRACE("");
 		BX_TRACE("Sort key masks:");
-		BX_TRACE("\t  View     %016" PRIx64, SORT_KEY_VIEW_MASK);
-		BX_TRACE("\t  Draw bit %016" PRIx64, SORT_KEY_DRAW_BIT);
-		BX_TRACE("\t  Seq      %016" PRIx64, SORT_KEY_SEQ_MASK);
-		BX_TRACE("\tD Trans    %016" PRIx64, SORT_KEY_DRAW_TRANS_MASK);
-		BX_TRACE("\tD Program  %016" PRIx64, SORT_KEY_DRAW_PROGRAM_MASK);
-		BX_TRACE("\tC Program  %016" PRIx64, SORT_KEY_COMPUTE_PROGRAM_MASK);
-		BX_TRACE("\tD Depth    %016" PRIx64, SORT_KEY_DRAW_DEPTH_MASK);
+		BX_TRACE("\t  View     %016I64x", SORT_KEY_VIEW_MASK);
+		BX_TRACE("\t  Draw bit %016I64x", SORT_KEY_DRAW_BIT);
+		BX_TRACE("\t  Seq      %016I64x", SORT_KEY_SEQ_MASK);
+		BX_TRACE("\tD Trans    %016I64x", SORT_KEY_DRAW_TRANS_MASK);
+		BX_TRACE("\tD Program  %016I64x", SORT_KEY_DRAW_PROGRAM_MASK);
+		BX_TRACE("\tC Program  %016I64x", SORT_KEY_COMPUTE_PROGRAM_MASK);
+		BX_TRACE("\tD Depth    %016I64x", SORT_KEY_DRAW_DEPTH_MASK);
 
 		BX_TRACE("");
 		BX_TRACE("Supported capabilities (renderer %s, vendor 0x%04x, device 0x%04x):"

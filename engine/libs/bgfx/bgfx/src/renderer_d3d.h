@@ -119,7 +119,7 @@ namespace bgfx
 			invalidate(_key);
 			m_hashMap.insert(stl::make_pair(_key, _value) );
 			BX_CHECK(isGraphicsDebuggerPresent()
-				|| 1 == getRefCount(_value), "Interface ref count %d, hash %" PRIx64 "."
+				|| 1 == getRefCount(_value), "Interface ref count %d, hash %I64x" "."
 				, getRefCount(_value)
 				, _key
 				);
