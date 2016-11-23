@@ -59,4 +59,4 @@ install_manifest.txt
 CTestTestfile.cmake
 
 /.idea/
-/build/
+cmake-*/
